@@ -12,7 +12,7 @@ import 'package:ny_times_stories_app_flutter/src/core/util/router.dart';
 import 'package:ny_times_stories_app_flutter/src/features/intro/presentation/pages/intro_page.dart';
 import 'package:provider/provider.dart';
 
-import 'src/core/common_feature/domain/entities/language_enum.dart';
+import 'src/core/common_feature/data/entities/language_enum.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 

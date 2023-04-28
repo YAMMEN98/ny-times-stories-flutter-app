@@ -4,19 +4,26 @@ class ApiResponse<T> {
   ApiResponse({
     required this.status,
     required this.copyright,
+    required this.section,
+    required this.last_updated,
     required this.numResults,
     required this.results,
   });
 
   late final String? status;
   late final String? copyright;
+  late final String? section;
+  late final String? last_updated;
   late final int? numResults;
   late final T? results;
 
-  static fromJson<T>(Map<dynamic, dynamic> json,  tFromJson) {
+
+  factory  ApiResponse.fromJson(Map<dynamic, dynamic> json,  tFromJson) {
     return ApiResponse<T>(
       status: json['status'],
       copyright: json['copyright'],
+      section: json['section'],
+      last_updated: json['last_updated'],
       numResults: json['num_results'],
       results: tFromJson(json['results']),
     );
@@ -33,6 +40,8 @@ class ApiResponse<T> {
     if (other is ApiResponse) {
       return other.status == status &&
           other.copyright == copyright &&
+          other.section == section &&
+          other.last_updated == last_updated &&
           other.numResults == numResults &&
           other.results is List
           ? listEquals(other.results, results as List)

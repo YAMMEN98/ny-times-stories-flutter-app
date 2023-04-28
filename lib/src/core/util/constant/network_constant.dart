@@ -1,10 +1,6 @@
-const String apiUrl = "http://api.nytimes.com/svc/mostpopular/v2/mostviewed/";
-const String apiKey = "WiRqmPm4mBO4ssOsQL7uWDS0lJO4KviJ";
+const String apiUrl = "https://api.nytimes.com/svc/topstories/v2/";
+const String apiKey = "zduCteyAIwA1MCU2SgJVKhr4KVeQr2bx";
 
 String getApiKeyPath() {
   return "?api-key=$apiKey";
-}
-
-String getNyTimeArticle(int period) {
-  return "all-sections/${period.toString()}.json${getApiKeyPath()}";
 }

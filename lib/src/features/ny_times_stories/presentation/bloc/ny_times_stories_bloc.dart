@@ -23,7 +23,7 @@ class NyTimesStoriesBloc
     emitter(LoadingGetNyTimesStoriesState());
 
     final result = await nyTimesUseCase.call(
-      NyTimesStoriesParams(),
+      NyTimesStoriesParams(""),
     );
     result.fold((l) {
         emitter(ErrorGetNyTimesStoriesState(l.errorMessage));

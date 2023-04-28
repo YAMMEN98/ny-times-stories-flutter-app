@@ -63,7 +63,10 @@ dependencies:
   equatable: ^2.0.5
 
   # Fetch Data From Api
-  dio: ^5.0.3
+  retrofit: ^4.0.1
+
+  #for logging purpose
+  logger: any
 
   # Logging Interceptor
   logging: ^1.1.1
@@ -104,6 +107,8 @@ dev_dependencies:
   # To generate Localization File's
   build_runner: ^2.3.3
   json_serializable: ^6.6.1
+  retrofit_generator: '>=5.0.0 <6.0.0'
+
   # Localization config
   flutter_localizations:
     sdk: flutter

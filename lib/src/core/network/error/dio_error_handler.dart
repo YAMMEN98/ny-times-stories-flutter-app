@@ -18,12 +18,7 @@ String handleDioError(DioError error) {
       break;
     case DioErrorType.badResponse:
       {
-        if (error.response?.data['code'] != null &&
-            (error.response?.data['code'] ?? "0") != "0") {
-          errorDescription = error.response?.data['msg'];
-        } else {
-          if (error.response?.statusCode == 200 &&
-              ("${(error.response?.data["statusCode"] ?? "0")}" != "0")) {
+          if (error.response?.statusCode == 200 ) {
             if ((error.response?.data['fault']['faultstring'] ?? "") != "") {
               errorDescription =
                   (error.response?.data['fault']['faultstring'] ?? "");
@@ -69,7 +64,6 @@ String handleDioError(DioError error) {
             errorDescription =
                 "Received invalid status code: ${error.response?.statusCode}";
           }
-        }
 
         break;
       }

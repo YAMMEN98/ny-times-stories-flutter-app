@@ -3,6 +3,8 @@ import 'package:ny_times_stories_app_flutter/src/core/common_feature/presentatio
 import 'package:ny_times_stories_app_flutter/src/core/common_feature/presentation/widgets/custom_app_bar_widget.dart';
 import 'package:ny_times_stories_app_flutter/src/core/translations/l10n.dart';
 import 'package:ny_times_stories_app_flutter/src/core/util/helper.dart';
+import 'package:ny_times_stories_app_flutter/src/core/util/injections.dart';
+import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/domain/usecases/ny_times_stories_usecase.dart';
 import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/presentation/bloc/ny_times_stories_bloc.dart';
 import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/presentation/widgets/story_card_widget.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -27,6 +29,7 @@ class _NyTimesStoriesPageState extends State<NyTimesStoriesPage> {
   @override
   void initState() {
     // Call event to get ny times article
+    sl<NyTimesStoriesUseCase>().call(NyTimesStoriesParams("world"));
     super.initState();
   }
 

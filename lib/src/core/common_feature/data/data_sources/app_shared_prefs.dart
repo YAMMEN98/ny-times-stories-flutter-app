@@ -1,4 +1,4 @@
-import 'package:ny_times_stories_app_flutter/src/core/common_feature/domain/entities/language_enum.dart';
+import 'package:ny_times_stories_app_flutter/src/core/common_feature/data/entities/language_enum.dart';
 import 'package:ny_times_stories_app_flutter/src/core/util/constant/local_storage_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
