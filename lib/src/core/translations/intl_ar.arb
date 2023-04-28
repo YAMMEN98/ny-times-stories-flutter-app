@@ -1,0 +1,18 @@
+{
+  "arabic": "العربية",
+  "english": "English",
+  "ny_times_most_popular": "NY Times الأكثر شيوعاً في",
+  "required_field": "الحقل مطلوب",
+  "dark_skin": "المظهر الليلي",
+  "light_skin": "المظهر النهاري",
+  "language": "اللغة",
+  "pull_up_load": "اسحب للتحميل",
+  "load_failed": "فشل التحميل! انقر فوق إعادة المحاولة!",
+  "release_to_load": "حرر لتحميل المزيد",
+  "no_data": "لا يوجد بيانات!",
+  "period": "الفترة",
+  "search": "البحث",
+  "server_error": "خطأ بالمخدم",
+  "article_details": "تفاصيل المقالة",
+  "see_more": "مشاهدة المزيد"
+}

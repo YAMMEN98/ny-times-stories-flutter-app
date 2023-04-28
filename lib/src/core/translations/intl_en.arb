@@ -1,0 +1,18 @@
+{
+  "arabic": "العربية",
+  "english": "English",
+  "ny_times_most_popular": "NY Times Most Popular",
+  "required_field": "Required Field",
+  "dark_skin": "Dark Skin",
+  "light_skin": "Light Skin",
+  "language": "Language",
+  "pull_up_load": " Pull Up Load",
+  "load_failed": "Load failed! Click Retry!",
+  "release_to_load": "Release To Load More",
+  "no_data": "No Data!",
+  "period": "Period",
+  "search": "Search",
+  "server_error": "Server Error",
+  "article_details": "Article Details",
+  "see_more": "See More"
+}
