@@ -28,7 +28,7 @@ Stories, display story details, and see more about details.
 - Apply localization en/ar languages.
 - View Image And Zoom It.
 - View story details from url by ```WebView```
-- Created a lane to generate apk automatically when upload code to the main branch.
+- Created a lane in ```.github/workflows/generate_apk.yaml``` to generate apk automatically when upload code to the main branch.
 
 
 - Apply Unit Testing .
@@ -65,6 +65,10 @@ report, follow these steps to run it:
     - Open CSV file by excel and you will see like this result:
 
       ![Text Coverage / Excel](https://github.com/YAMMEN98/ny-times-stories-flutter-app/blob/main/coverage_test_excel.png)
+
+## Note:
+
+I had covered Api and Repository layer in Unit Test cause the time, of course i can cover all app if i have time.
 
 ## Author
 
