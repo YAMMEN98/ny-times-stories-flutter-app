@@ -13,7 +13,7 @@ Stories, display story details, and see more about details.
 
 ## Installing
 
-- Clone the repository ```https://github.com/YAMMEN98/ny-times-stories-flutter-app.git```
+- Clone the repository ```git clone https://github.com/YAMMEN98/ny-times-stories-flutter-app.git```
 - Open the project in Android Studio or VS Code.
 - Run the app on an emulator or physical device.
 
