@@ -25,6 +25,7 @@ Stories, display story details, and see more about details.
 - Display stories as ```List View``` or ```Grid View```
 - Display story details.
 - Apply Dark/Light theme.
+- Add App Logo.
 - Apply localization en/ar languages.
 - View Image And Zoom It.
 - View story details from url by ```WebView```
