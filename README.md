@@ -68,9 +68,17 @@ report, follow these steps to run it:
 
       ![Text Coverage / Excel](https://github.com/YAMMEN98/ny-times-stories-flutter-app/blob/main/coverage_test_excel.png)
 
+
+## App on Web Browser
+
+![Text Coverage / Excel](https://github.com/YAMMEN98/ny-times-stories-flutter-app/blob/main/web.png)
+
+
 ## Note:
 
 I had covered Api and Repository layer in Unit Test cause the time, of course I can cover all app if I have time.
+
+
 
 ## Author
 
