@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ny_times_stories_app_flutter/main.dart';
 import 'package:ny_times_stories_app_flutter/src/core/common_feature/data/data_sources/app_shared_prefs.dart';
 import 'package:ny_times_stories_app_flutter/src/core/common_feature/data/entities/language_enum.dart';
+import 'package:ny_times_stories_app_flutter/src/core/common_feature/presentation/providers/language_provider.dart';
+import 'package:ny_times_stories_app_flutter/src/core/common_feature/presentation/providers/theme_provider.dart';
 import 'package:ny_times_stories_app_flutter/src/core/translations/l10n.dart';
 import 'package:ny_times_stories_app_flutter/src/core/util/helper/helper.dart';
 import 'package:ny_times_stories_app_flutter/src/core/util/injections.dart';
-import 'package:provider/provider.dart';
 
 class AppDrawerPage extends StatefulWidget {
   const AppDrawerPage({Key? key}) : super(key: key);
@@ -49,56 +50,64 @@ class _AppDrawerPageState extends State<AppDrawerPage> {
           ),
 
           // Arabic language
-          Theme(
-            data: ThemeData(
-                unselectedWidgetColor: Theme.of(context).iconTheme.color),
-            child: RadioListTile(
-              activeColor: selectedLanguage != LanguageEnum.ar
-                  ? Theme.of(context).iconTheme.color
-                  : Theme.of(context).cardColor,
-              contentPadding: EdgeInsets.zero,
-              title: Text(
-                S.of(context).arabic,
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+          Consumer(builder: (context, ref, child) {
+            return Theme(
+              data: ThemeData(
+                  unselectedWidgetColor: Theme.of(context).iconTheme.color),
+              child: RadioListTile(
+                activeColor: selectedLanguage != LanguageEnum.ar
+                    ? Theme.of(context).iconTheme.color
+                    : Theme.of(context).cardColor,
+                contentPadding: EdgeInsets.zero,
+                title: Text(
+                  S.of(context).arabic,
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                value: LanguageEnum.values[0],
+                groupValue: selectedLanguage,
+                onChanged: (value) {
+                  selectedLanguage = value!;
+                  setState(() {
+                    Helper.setLang(selectedLanguage);
+                    ref.read(languageProvider.notifier).state = selectedLanguage;
+                  });
+                },
               ),
-              value: LanguageEnum.values[0],
-              groupValue: selectedLanguage,
-              onChanged: (value) {
-                selectedLanguage = value!;
-                setState(() {
-                  App.setLocale(context, selectedLanguage);
-                });
-              },
-            ),
-          ),
+            );
+          },),
+
 
           // English language
-          Theme(
-            data: ThemeData(
-                unselectedWidgetColor: Theme.of(context).iconTheme.color),
-            child: RadioListTile(
-              activeColor: selectedLanguage != LanguageEnum.en
-                  ? Theme.of(context).iconTheme.color
-                  : Theme.of(context).cardColor,
-              contentPadding: EdgeInsets.zero,
-              title: Text(
-                S.of(context).english,
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+          Consumer(builder: (context, ref, child) {
+            return Theme(
+              data: ThemeData(
+                  unselectedWidgetColor: Theme.of(context).iconTheme.color),
+              child: RadioListTile(
+                activeColor: selectedLanguage != LanguageEnum.en
+                    ? Theme.of(context).iconTheme.color
+                    : Theme.of(context).cardColor,
+                contentPadding: EdgeInsets.zero,
+                title: Text(
+                  S.of(context).english,
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                value: LanguageEnum.values[1],
+                groupValue: selectedLanguage,
+                onChanged: (value) {
+                  selectedLanguage = value!;
+                  setState(() {
+                    Helper.setLang(selectedLanguage);
+                    ref.read(languageProvider.notifier).state = selectedLanguage;
+                  });
+                },
               ),
-              value: LanguageEnum.values[1],
-              groupValue: selectedLanguage,
-              onChanged: (value) {
-                selectedLanguage = value!;
-                setState(() {
-                  App.setLocale(context, selectedLanguage);
-                });
-              },
-            ),
-          ),
+            );
+          },),
+
 
           // Theme
           Row(
@@ -110,22 +119,25 @@ class _AppDrawerPageState extends State<AppDrawerPage> {
                     : S.of(context).light_skin,
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
-              Switch(
-                activeColor: Theme.of(context).cardColor,
-                value: Helper.isDarkTheme(),
-                onChanged: (value) {
-                  if (value) {
-                    // Dark
-                    sl<AppSharedPrefs>().setDarkTheme(true);
-                  } else {
-                    // Light
-                    sl<AppSharedPrefs>().setDarkTheme(false);
-                  }
-                  Provider.of<AppNotifier>(context, listen: false)
-                      .updateThemeTitle(sl<AppSharedPrefs>().getIsDarkTheme());
-                  setState(() {});
-                },
-              ),
+              Consumer(builder: (context, ref, child) {
+                return Switch(
+                  activeColor: Theme.of(context).cardColor,
+                  value: Helper.isDarkTheme(),
+                  onChanged: (value) {
+                    if (value) {
+                      // Dark
+                      sl<AppSharedPrefs>().setDarkTheme(true);
+                      ref.read(themeModeProvider.notifier).state = true;
+                    } else {
+                      // Light
+                      sl<AppSharedPrefs>().setDarkTheme(false);
+                      ref.read(themeModeProvider.notifier).state = false;
+                    }
+
+                    setState(() {});
+                  },
+                );
+              },)
             ],
           ),
         ],

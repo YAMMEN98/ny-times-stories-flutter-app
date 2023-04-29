@@ -3,17 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as fv;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ny_times_stories_app_flutter/src/core/common_feature/data/data_sources/app_shared_prefs.dart';
+import 'package:ny_times_stories_app_flutter/src/core/common_feature/presentation/providers/language_provider.dart';
 import 'package:ny_times_stories_app_flutter/src/core/styles/app_theme.dart';
 import 'package:ny_times_stories_app_flutter/src/core/translations/l10n.dart';
-import 'package:ny_times_stories_app_flutter/src/core/util/helper/helper.dart';
 import 'package:ny_times_stories_app_flutter/src/core/util/injections.dart';
 import 'package:ny_times_stories_app_flutter/src/core/util/router.dart';
 import 'package:ny_times_stories_app_flutter/src/features/intro/presentation/pages/intro_page.dart';
-import 'package:provider/provider.dart';
 
-import 'src/core/common_feature/data/entities/language_enum.dart';
+import 'src/core/common_feature/presentation/providers/theme_provider.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
@@ -23,7 +22,9 @@ void main() async {
   await initInjections();
   runApp(DevicePreview(
     builder: (context) {
-      return const App();
+      return fv.ProviderScope(
+        child: App(),
+      );
     },
     enabled: false,
   ));
@@ -31,110 +32,41 @@ void main() async {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
 }
 
-class App extends StatefulWidget {
+class App extends ConsumerWidget {
   const App({Key? key}) : super(key: key);
 
   @override
-  _AppState createState() => _AppState();
+  Widget build(BuildContext context, ref) {
+    final isDarkTheme = ref.watch(themeModeProvider);
+    final language = ref.watch(languageProvider);
 
-  static void setLocale(BuildContext context, LanguageEnum newLocale) {
-    _AppState state = context.findAncestorStateOfType()!;
-    state.setState(() {
-      state.locale = Locale(newLocale.name);
-    });
-    sl<AppSharedPrefs>().setLang(newLocale);
-  }
-}
-
-class _AppState extends State<App> with WidgetsBindingObserver {
-  Locale locale = const Locale("en");
-  final GlobalKey<ScaffoldMessengerState> snackbarKey =
-      GlobalKey<ScaffoldMessengerState>();
-
-  @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addObserver(this);
-
-    if (mounted) {
-      LanguageEnum newLocale = Helper.getLang();
-      setState(() {
-        locale = Locale(newLocale.local);
-      });
-    }
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return fv.ProviderScope(
-      child: ChangeNotifierProvider(
-        create: (_) => AppNotifier(),
-        child: Consumer<AppNotifier>(
-          builder: (context, value, child) {
-            return ScreenUtilInit(
-              designSize: const Size(360, 690),
-              minTextAdapt: true,
-              splitScreenMode: true,
-              builder: (context, child) {
-                return MaterialApp(
-                  useInheritedMediaQuery: false,
-                  title: 'Ny Times Stories App',
-                  scaffoldMessengerKey: snackbarKey,
-                  onGenerateRoute: AppRouter.generateRoute,
-                  theme: Helper.isDarkTheme() ? darkAppTheme : appTheme,
-                  debugShowCheckedModeBanner: false,
-                  locale: locale,
-                  builder: DevicePreview.appBuilder,
-                  localizationsDelegates: const [
-                    S.delegate,
-                    GlobalMaterialLocalizations.delegate,
-                    GlobalWidgetsLocalizations.delegate,
-                    GlobalCupertinoLocalizations.delegate,
-                  ],
-                  navigatorKey: navigatorKey,
-                  supportedLocales: const [
-                    Locale("ar"),
-                    Locale("en"),
-                  ],
-                  home: const IntroPage(),
-                );
-              },
-            );
-          },
-        ),
-      ),
+    return ScreenUtilInit(
+      designSize: const Size(360, 690),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MaterialApp(
+          useInheritedMediaQuery: false,
+          title: 'New York Times Stories App',
+          onGenerateRoute: AppRouter.generateRoute,
+          theme: isDarkTheme ? darkAppTheme : appTheme,
+          debugShowCheckedModeBanner: false,
+          locale: Locale(language.name),
+          builder: DevicePreview.appBuilder,
+          localizationsDelegates: const [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          navigatorKey: navigatorKey,
+          supportedLocales: const [
+            Locale("ar"),
+            Locale("en"),
+          ],
+          home: const IntroPage(),
+        );
+      },
     );
-  }
-}
-
-// App notifier for Lang, Theme, ...
-class AppNotifier extends ChangeNotifier {
-  late bool darkTheme;
-
-  AppNotifier() {
-    _initialise();
-  }
-
-  Future _initialise() async {
-    darkTheme = Helper.isDarkTheme();
-
-    notifyListeners();
-  }
-
-  void updateThemeTitle(bool newDarkTheme) {
-    darkTheme = newDarkTheme;
-    if (Helper.isDarkTheme()) {
-      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
-    } else {
-      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
-    }
-    notifyListeners();
   }
 }
