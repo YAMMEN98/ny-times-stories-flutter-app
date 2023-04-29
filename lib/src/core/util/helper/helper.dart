@@ -1,4 +1,5 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:ny_times_stories_app_flutter/src/core/common_feature/data/entities/language_enum.dart';
 import 'package:ny_times_stories_app_flutter/src/core/util/constant/app_constants.dart';
 
@@ -41,5 +42,10 @@ class Helper {
 
   static bool isDarkTheme() {
     return sl<AppSharedPrefs>().getIsDarkTheme();
+  }
+
+  static formatDate(String date) {
+    DateTime dateTime = DateTime.parse(date);
+    return DateFormat('dd/MM/yyyy').format(dateTime);
   }
 }

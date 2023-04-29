@@ -9,10 +9,12 @@ import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/data/
 class StoryCardGridItemWidget extends StatefulWidget {
   final StoryModel model;
 
-  const StoryCardGridItemWidget({Key? key, required this.model}) : super(key: key);
+  const StoryCardGridItemWidget({Key? key, required this.model})
+      : super(key: key);
 
   @override
-  State<StoryCardGridItemWidget> createState() => _StoryCardGridItemWidgetState();
+  State<StoryCardGridItemWidget> createState() =>
+      _StoryCardGridItemWidgetState();
 }
 
 class _StoryCardGridItemWidgetState extends State<StoryCardGridItemWidget> {
@@ -21,12 +23,14 @@ class _StoryCardGridItemWidgetState extends State<StoryCardGridItemWidget> {
 
   @override
   void initState() {
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    // I put it here because it is not updated when apply search because they don't enter the initState again
+    // so I should but it here to update it when chane list item
+
     // Check if somethings happened and do not return media
     // If everything seems to be in order we will display the image
     // else display placeholder instead
@@ -82,61 +86,75 @@ class _StoryCardGridItemWidgetState extends State<StoryCardGridItemWidget> {
           },
 
           // Space
-          SizedBox(
-            height: Helper.getVerticalSpace(),
-          ),
-
           Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                // Title
-                Text(
-                  _getTitle(),
-                  style: Theme.of(context).textTheme.headlineMedium,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  softWrap: true,
-                ),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  "/story_details_page",
+                  arguments: widget.model,
+                );
+              },
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: Helper.getVerticalSpace(),
+                  ),
 
-                // Space
-                SizedBox(
-                  height: Helper.getVerticalSpace() ,
-                ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        // Title
+                        Text(
+                          _getTitle(),
+                          style: Theme.of(context).textTheme.headlineMedium,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          softWrap: true,
+                        ),
 
-                Text(
-                  _getAbstract(),
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyLarge!
-                      .copyWith(color: AppColors.darkGray),
-                ),
+                        // Space
+                        SizedBox(
+                          height: Helper.getVerticalSpace(),
+                        ),
 
-                // Space
-                SizedBox(
-                  height: 5.h,
-                ),
+                        Text(
+                          _getAbstract(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(color: AppColors.darkGray),
+                        ),
 
-                Spacer(),
+                        // Space
+                        SizedBox(
+                          height: 5.h,
+                        ),
 
-                // Author
-                Text(
-                  _getAuthor(),
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleSmall!
-                      .copyWith(color: AppColors.darkGray),
-                ),
-              ],
+                        Spacer(),
+
+                        // Author
+                        Text(
+                          _getAuthor(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleSmall!
+                              .copyWith(color: AppColors.darkGray),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  // Space
+                  SizedBox(
+                    width: Helper.getVerticalSpace(),
+                  ),
+                ],
+              ),
             ),
           ),
-
-          // Space
-          SizedBox(
-            width: Helper.getVerticalSpace(),
-          ),
-
-
         ],
       ),
     );
@@ -159,7 +177,6 @@ class _StoryCardGridItemWidgetState extends State<StoryCardGridItemWidget> {
       return defaultStr;
     }
   }
-
 
   // Author
   String _getAuthor() {

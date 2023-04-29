@@ -4,7 +4,6 @@ import 'package:ny_times_stories_app_flutter/src/core/network/error/dio_error_ha
 import 'package:ny_times_stories_app_flutter/src/core/network/error/exceptions.dart';
 import 'package:ny_times_stories_app_flutter/src/core/network/rest_client.dart';
 import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/data/entities/story_model.dart';
-import 'package:retrofit/retrofit.dart';
 
 class NyTimesStoriesApi {
   final RestClient restClient;
@@ -14,8 +13,7 @@ class NyTimesStoriesApi {
   NyTimesStoriesApi(this.restClient);
 
   /// NyTimes method
-  Future<ApiResponse<List<StoryModel>>> getNyTimesData(
-      String section) async {
+  Future<ApiResponse<List<StoryModel>>> getNyTimesData(String section) async {
     try {
       final result = (await restClient.getStories(section));
       if (result.data.results == null) {

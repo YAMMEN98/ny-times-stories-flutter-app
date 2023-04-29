@@ -90,23 +90,22 @@ extension StorySectionEnumExtension on StorySectionEnum {
       case StorySectionEnum.technology:
         return "technology";
 
-        case StorySectionEnum.theater:
+      case StorySectionEnum.theater:
         return "theater";
 
-        case StorySectionEnum.tMagazine:
+      case StorySectionEnum.tMagazine:
         return "t-magazine";
 
-        case StorySectionEnum.travel:
+      case StorySectionEnum.travel:
         return "travel";
 
-        case StorySectionEnum.upshot:
+      case StorySectionEnum.upshot:
         return "upshot";
 
-
-        case StorySectionEnum.us:
+      case StorySectionEnum.us:
         return "us";
 
-        case StorySectionEnum.world:
+      case StorySectionEnum.world:
         return "world";
 
       default:

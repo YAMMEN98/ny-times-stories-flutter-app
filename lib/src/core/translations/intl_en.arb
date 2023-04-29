@@ -11,5 +11,7 @@
   "section": "Section",
   "reset": "Reset",
   "confirm": "Confirm",
-  "no_data": "No Data"
+  "no_data": "No Data",
+  "see_more": "See more",
+  "story_details": "Story Details"
 }

@@ -18,7 +18,8 @@ String handleDioError(DioError error) {
       break;
     case DioErrorType.badResponse:
       {
-          if (error.response?.statusCode == 200 ) {
+        try {
+          if (error.response?.statusCode == 200) {
             if ((error.response?.data['fault']['faultstring'] ?? "") != "") {
               errorDescription =
                   (error.response?.data['fault']['faultstring'] ?? "");
@@ -64,6 +65,9 @@ String handleDioError(DioError error) {
             errorDescription =
                 "Received invalid status code: ${error.response?.statusCode}";
           }
+        } catch (e) {
+          errorDescription = "Unknown Error";
+        }
 
         break;
       }

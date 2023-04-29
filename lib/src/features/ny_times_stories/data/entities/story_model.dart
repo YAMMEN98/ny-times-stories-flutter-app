@@ -26,6 +26,7 @@ class StoryModel {
     this.multimedia,
     required this.shortUrl,
   });
+
   late final String section;
   late final String? subsection;
   late final String? title;
@@ -46,8 +47,7 @@ class StoryModel {
   late final List<MultiMediaModel>? multimedia;
   late final String shortUrl;
 
-  factory StoryModel.fromJson(json) =>
-      _$StoryModelFromJson(json);
+  factory StoryModel.fromJson(json) => _$StoryModelFromJson(json);
 
   toJson() => _$StoryModelToJson(this);
 
@@ -55,4 +55,3 @@ class StoryModel {
     return json.map((e) => StoryModel.fromJson(e)).toList();
   }
 }
-

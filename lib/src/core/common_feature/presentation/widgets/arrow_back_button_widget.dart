@@ -23,7 +23,6 @@ class ArrowBackButtonWidget extends StatelessWidget {
           Icons.arrow_back,
           color: iconColor ?? Theme.of(context).iconTheme.color,
           size: 20.sp,
-
         ),
       ),
     );

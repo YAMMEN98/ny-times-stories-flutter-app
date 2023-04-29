@@ -24,7 +24,9 @@ class CustomAppBarWidget extends StatelessWidget {
     return Container(
       width: ScreenUtil().screenWidth,
       height: height ?? 60.h,
-      padding: EdgeInsets.symmetric(horizontal: 10.w, ),
+      padding: EdgeInsets.symmetric(
+        horizontal: 10.w,
+      ),
       decoration: BoxDecoration(
           color: backgroundColor ?? Theme.of(context).scaffoldBackgroundColor,
           boxShadow: [

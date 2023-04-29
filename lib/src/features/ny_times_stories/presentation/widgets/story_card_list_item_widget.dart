@@ -9,10 +9,12 @@ import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/data/
 class StoryCardListItemWidget extends StatefulWidget {
   final StoryModel model;
 
-  const StoryCardListItemWidget({Key? key, required this.model}) : super(key: key);
+  const StoryCardListItemWidget({Key? key, required this.model})
+      : super(key: key);
 
   @override
-  State<StoryCardListItemWidget> createState() => _StoryCardListItemWidgetState();
+  State<StoryCardListItemWidget> createState() =>
+      _StoryCardListItemWidgetState();
 }
 
 class _StoryCardListItemWidgetState extends State<StoryCardListItemWidget> {
@@ -21,12 +23,14 @@ class _StoryCardListItemWidgetState extends State<StoryCardListItemWidget> {
 
   @override
   void initState() {
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    // I put it here because it is not updated when apply search because they don't enter the initState again
+    // so I should but it here to update it when chane list item
+
     // Check if somethings happened and do not return media
     // If everything seems to be in order we will display the image
     // else display placeholder instead
@@ -101,7 +105,7 @@ class _StoryCardListItemWidgetState extends State<StoryCardListItemWidget> {
 
                 // Space
                 SizedBox(
-                  height: Helper.getVerticalSpace() ,
+                  height: Helper.getVerticalSpace(),
                 ),
 
                 Text(
@@ -125,7 +129,6 @@ class _StoryCardListItemWidgetState extends State<StoryCardListItemWidget> {
                       .titleSmall!
                       .copyWith(color: AppColors.darkGray),
                   softWrap: true,
-
                 ),
               ],
             ),
@@ -143,7 +146,7 @@ class _StoryCardListItemWidgetState extends State<StoryCardListItemWidget> {
             onPressed: () {
               Navigator.pushNamed(
                 context,
-                "/ny_times_article_details_page",
+                "/story_details_page",
                 arguments: widget.model,
               );
             },
@@ -174,7 +177,6 @@ class _StoryCardListItemWidgetState extends State<StoryCardListItemWidget> {
       return defaultStr;
     }
   }
-
 
   // Author
   String _getAuthor() {

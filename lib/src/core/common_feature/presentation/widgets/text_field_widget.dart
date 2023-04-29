@@ -67,7 +67,6 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
     return SizedBox(
       height: widget.height?.h,
       child: TextFormField(
-
         controller: widget.controller,
         onChanged: widget.onChanged,
         validator: widget.validator,

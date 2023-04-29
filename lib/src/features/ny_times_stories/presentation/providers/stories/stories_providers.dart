@@ -4,7 +4,6 @@ import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/domai
 import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/presentation/providers/stories/state/stories_notifier.dart';
 import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/presentation/providers/stories/state/stories_state.dart';
 
-
 final storiesStateNotifierProvider =
     StateNotifierProvider<StoriesNotifier, StoriesState>(
   (ref) {

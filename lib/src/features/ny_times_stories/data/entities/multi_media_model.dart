@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/data/entities/multi_media_model.dart';
 
 part 'multi_media_model.g.dart';
 
@@ -15,6 +14,7 @@ class MultiMediaModel {
     required this.caption,
     required this.copyright,
   });
+
   late final String url;
   late final String format;
   late final int height;
@@ -24,8 +24,8 @@ class MultiMediaModel {
   late final String caption;
   late final String copyright;
 
-  factory MultiMediaModel.fromJson(json) =>
-      _$MultiMediaModelFromJson(json);
+  factory MultiMediaModel.fromJson(json) => _$MultiMediaModelFromJson(json);
+
   toJson() => _$MultiMediaModelToJson(this);
 
   static List<MultiMediaModel> fromJsonList(List json) {

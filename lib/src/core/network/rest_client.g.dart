@@ -40,7 +40,6 @@ class _RestClient implements RestClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-
           final value = ApiResponse<List<StoryModel>>.fromJson(_result.data!, StoryModel.fromJsonList);
           final httpResponse = HttpResponse<ApiResponse<List<StoryModel>>>(value, _result);
           return httpResponse;

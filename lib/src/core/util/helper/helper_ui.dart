@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ny_times_stories_app_flutter/src/core/common_feature/presentation/widgets/arrow_back_button_widget.dart';
 import 'package:ny_times_stories_app_flutter/src/core/common_feature/presentation/widgets/button_widget.dart';
@@ -5,7 +6,6 @@ import 'package:ny_times_stories_app_flutter/src/core/styles/app_colors.dart';
 import 'package:ny_times_stories_app_flutter/src/core/translations/l10n.dart';
 import 'package:ny_times_stories_app_flutter/src/core/util/constant/app_constants.dart';
 import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/data/entities/story_model.dart';
-import 'package:flutter/material.dart';
 
 class HelperUi {
   static void showUpperSheetModal(BuildContext context, List<Widget> children,
@@ -46,7 +46,6 @@ class HelperUi {
                               iconColor: Theme.of(context).iconTheme.color!,
                             ),
                           ),
-
                         ],
                       ),
                       SizedBox(
@@ -69,8 +68,8 @@ class HelperUi {
                                   .textTheme
                                   .bodyLarge!
                                   .copyWith(
-                                fontWeight: FontWeight.bold,
-                              ),
+                                    fontWeight: FontWeight.bold,
+                                  ),
                               borderColor: Theme.of(context).iconTheme.color!,
                             ),
                           ),
@@ -91,8 +90,8 @@ class HelperUi {
                                   .textTheme
                                   .bodyLarge!
                                   .copyWith(
-                                fontWeight: FontWeight.bold,
-                              ),
+                                    fontWeight: FontWeight.bold,
+                                  ),
                               borderColor: Theme.of(context).iconTheme.color!,
                             ),
                           ),
@@ -124,10 +123,7 @@ class HelperUi {
     );
   }
 
-  static List<T> runFilter<T>(
-      String text,
-      List<T> allResult
-      ) {
+  static List<T> runFilter<T>(String text, List<T> allResult) {
     List<T> results = [];
     if (text.isEmpty) {
       // if the search field is empty or only contains white-space, we'll display all users
@@ -136,15 +132,14 @@ class HelperUi {
       results = allResult.where((user) {
         /// (*)
         // Story Model
-        if(user is StoryModel){
-          return (user.title?? defaultStr)
+        if (user is StoryModel) {
+          return (user.title ?? defaultStr)
               .toLowerCase()
               .contains(text.toLowerCase());
         }
 
         // Not a ty[e on if condition on (*)
         return false;
-
       }).toList();
     }
     return results;

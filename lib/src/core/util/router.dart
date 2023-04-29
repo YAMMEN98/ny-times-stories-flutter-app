@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ny_times_stories_app_flutter/src/core/common_feature/presentation/pages/photo_view_page.dart';
 import 'package:ny_times_stories_app_flutter/src/core/common_feature/presentation/pages/web_view_page.dart';
+import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/data/entities/story_model.dart';
 import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/presentation/pages/stories_page.dart';
+import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/presentation/pages/story_details_page.dart';
 
 class AppRouter {
   static String currentRoute = "/";
@@ -10,11 +12,23 @@ class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     currentRoute = settings.name ?? "/";
     switch (settings.name) {
-      // WebNy Times Stories page
+      // Stories page
       case '/stories_page':
         return CupertinoPageRoute(
           settings: RouteSettings(name: settings.name),
           builder: (_) => StoriesPage(),
+        );
+
+      // Story details page
+      case '/story_details_page':
+        return CupertinoPageRoute(
+          settings: RouteSettings(name: settings.name),
+          builder: (_) {
+            assert(settings.arguments != null, "story model is required");
+            return StoryDetailsPage(
+              model: settings.arguments as StoryModel,
+            );
+          },
         );
 
       // Web view page

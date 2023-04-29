@@ -23,35 +23,34 @@ class CachedImageWidget extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(radius ?? 0),
       child: Container(
-        decoration: radius == null
-            ? null
-            : BoxDecoration(
-                // image: DecorationImage(image: NetworkImage(appAdvert.imageUrl)),
-                borderRadius: BorderRadius.all(Radius.circular(radius ?? 0))),
-        height: height,
-        width: width,
-        child: CachedNetworkImage(
-          key: _backgroundImageKey,
-          imageUrl: imageUrl ?? "",
-          height: width,
+          decoration: radius == null
+              ? null
+              : BoxDecoration(
+                  // image: DecorationImage(image: NetworkImage(appAdvert.imageUrl)),
+                  borderRadius: BorderRadius.all(Radius.circular(radius ?? 0))),
+          height: height,
           width: width,
-          fit: BoxFit.cover,
-          errorWidget: (context, url, error) => Image.asset(
-            Helper.getImagePath("no_image.png"),
+          child: CachedNetworkImage(
+            key: _backgroundImageKey,
+            imageUrl: imageUrl ?? "",
             height: width,
             width: width,
             fit: BoxFit.cover,
-          ),
-          placeholder: (context, url) {
-            return Image.asset(
+            errorWidget: (context, url, error) => Image.asset(
               Helper.getImagePath("no_image.png"),
               height: width,
               width: width,
-              fit: BoxFit.fill,
-            );
-          },
-        )
-      ),
+              fit: BoxFit.cover,
+            ),
+            placeholder: (context, url) {
+              return Image.asset(
+                Helper.getImagePath("no_image.png"),
+                height: width,
+                width: width,
+                fit: BoxFit.fill,
+              );
+            },
+          )),
     );
   }
 }

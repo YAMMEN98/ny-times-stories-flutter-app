@@ -9,13 +9,11 @@ import 'domain/repositories/ny_times_stories_repository.dart';
 import 'domain/usecases/ny_times_stories_usecase.dart';
 
 initNyTimesStoriesInjections() {
-
   sl.registerFactory<NyTimesStoriesApi>(
       () => NyTimesStoriesApi(RestClient(DioNetwork.appAPI)));
   sl.registerFactory<NyTimesStoriesSharedPrefs>(
       () => NyTimesStoriesSharedPrefs(sl()));
-  sl.registerFactory<StoriesUseCase>(
-      () => StoriesUseCase(sl()));
+  sl.registerFactory<StoriesUseCase>(() => StoriesUseCase(sl()));
   sl.registerFactory<NyTimesStoriesRepository>(
       () => NyTimesStoriesRepositoryImpl(sl()));
 }

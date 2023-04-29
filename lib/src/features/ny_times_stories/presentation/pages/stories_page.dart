@@ -285,7 +285,9 @@ class _StoriesPageState extends ConsumerState<StoriesPage> {
                 failure: (value) {
                   return ReloadWidget.error(
                     content: value.error,
-                    onPressed: () {},
+                    onPressed: () {
+                      _getStories();
+                    },
                   );
                 },
                 orElse: () {
@@ -354,29 +356,34 @@ class _StoriesPageState extends ConsumerState<StoriesPage> {
   // Build actions in app bar
   List<Widget> _buildActions() {
     return [
-
       // List view
-        CircleAvatar(
-          backgroundColor:isListView? Theme.of(context).textTheme.bodyLarge!.color!.withOpacity(0.5):AppColors.transparent,
-          child: IconButton(
-            constraints: BoxConstraints(),
-            padding: EdgeInsets.zero,
-            onPressed: () {
-              setState(() {
-                isListView = true;
-              });
-            },
-            icon: Icon(
-              Icons.format_list_bulleted,
-              color: isListView?Theme.of(context).scaffoldBackgroundColor:Theme.of(context).iconTheme.color,
-              size: 20.sp,
-            ),
+      CircleAvatar(
+        backgroundColor: isListView
+            ? Theme.of(context).textTheme.bodyLarge!.color!.withOpacity(0.5)
+            : AppColors.transparent,
+        child: IconButton(
+          constraints: BoxConstraints(),
+          padding: EdgeInsets.zero,
+          onPressed: () {
+            setState(() {
+              isListView = true;
+            });
+          },
+          icon: Icon(
+            Icons.format_list_bulleted,
+            color: isListView
+                ? Theme.of(context).scaffoldBackgroundColor
+                : Theme.of(context).iconTheme.color,
+            size: 20.sp,
           ),
         ),
+      ),
 
       // Grid view
       CircleAvatar(
-        backgroundColor:!isListView? Theme.of(context).textTheme.bodyLarge!.color!.withOpacity(0.5):AppColors.transparent,
+        backgroundColor: !isListView
+            ? Theme.of(context).textTheme.bodyLarge!.color!.withOpacity(0.5)
+            : AppColors.transparent,
         child: IconButton(
           constraints: BoxConstraints(),
           padding: EdgeInsets.zero,
@@ -387,7 +394,9 @@ class _StoriesPageState extends ConsumerState<StoriesPage> {
           },
           icon: Icon(
             Icons.grid_view_rounded,
-            color: !isListView?Theme.of(context).scaffoldBackgroundColor:Theme.of(context).iconTheme.color,
+            color: !isListView
+                ? Theme.of(context).scaffoldBackgroundColor
+                : Theme.of(context).iconTheme.color,
             size: 20.sp,
           ),
         ),

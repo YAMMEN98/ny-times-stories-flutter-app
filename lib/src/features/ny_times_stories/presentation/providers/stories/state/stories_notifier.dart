@@ -1,7 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ny_times_stories_app_flutter/src/core/util/helper/helper.dart';
 import 'package:ny_times_stories_app_flutter/src/core/util/helper/helper_ui.dart';
-import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/data/entities/section_story_enum.dart';
 import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/data/entities/story_model.dart';
 import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/domain/usecases/ny_times_stories_usecase.dart';
 import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/presentation/providers/stories/state/stories_state.dart';
@@ -11,7 +9,6 @@ class StoriesNotifier extends StateNotifier<StoriesState> {
 
   // All stories result
   List<StoryModel> allStories = [];
-
 
   StoriesNotifier({
     required this.storiesUseCase,
@@ -25,16 +22,15 @@ class StoriesNotifier extends StateNotifier<StoriesState> {
     final response = await storiesUseCase.call(params);
 
     state = await response.fold(
-          (failure) {
+      (failure) {
         return StoriesState.failure(failure.errorMessage);
       },
-          (stories) async {
-            allStories =stories;
-        return  StoriesState.success(HelperUi.runFilter(text??"", allStories));
+      (stories) async {
+        allStories = stories;
+        return StoriesState.success(HelperUi.runFilter(text ?? "", allStories));
       },
     );
   }
-
 
   // Get Stories
   Future<void> getSearchedStories(String text) async {
@@ -43,6 +39,4 @@ class StoriesNotifier extends StateNotifier<StoriesState> {
 
     state = StoriesState.success(HelperUi.runFilter(text, allStories));
   }
-
-
 }
