@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stories_app_flutter/src/core/common_feature/presentation/pages/background_page.dart';
@@ -244,39 +245,42 @@ class _StoryDetailsPageState extends State<StoryDetailsPage> {
                           ),
 
                           // See more
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(
-                                context,
-                                "/web_view_page",
-                                arguments: widget.model.url,
-                              );
-                            },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  S.of(context).see_more,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyLarge!
-                                      .copyWith(
-                                        wordSpacing: 3,
-                                        letterSpacing: 1,
-                                        fontWeight: FontWeight.bold,
-                                        decoration: TextDecoration.underline,
-                                      ),
-                                ),
-                                SizedBox(
-                                  width: 3.w,
-                                ),
-                                Icon(
-                                  Icons.arrow_forward_ios_rounded,
-                                  size: 15,
-                                )
-                              ],
+                          if (defaultTargetPlatform == TargetPlatform.android ||
+                              defaultTargetPlatform == TargetPlatform.iOS) ...{
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  "/web_view_page",
+                                  arguments: widget.model.url,
+                                );
+                              },
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    S.of(context).see_more,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge!
+                                        .copyWith(
+                                          wordSpacing: 3,
+                                          letterSpacing: 1,
+                                          fontWeight: FontWeight.bold,
+                                          decoration: TextDecoration.underline,
+                                        ),
+                                  ),
+                                  SizedBox(
+                                    width: 3.w,
+                                  ),
+                                  Icon(
+                                    Icons.arrow_forward_ios_rounded,
+                                    size: 15,
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
+                          },
 
                           // Space
                           SizedBox(
