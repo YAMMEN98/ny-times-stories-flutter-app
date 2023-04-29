@@ -18,7 +18,7 @@ class _IntroPageState extends State<IntroPage> {
         seconds: 1,
       ),
       () {
-        Navigator.pushNamed(context, "/stories_page");
+        Navigator.pushNamedAndRemoveUntil(context, "/stories_page",(route) => false,);
       },
     );
     super.initState();
