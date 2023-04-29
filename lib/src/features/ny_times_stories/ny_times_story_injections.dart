@@ -1,7 +1,7 @@
-import 'package:ny_times_stories_app_flutter/src/core/network/dio_network.dart';
-import 'package:ny_times_stories_app_flutter/src/core/network/rest_client.dart';
-import 'package:ny_times_stories_app_flutter/src/core/util/injections.dart';
-import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/data/data_sources/stories_api.dart';
+import 'package:stories_app_flutter/src/core/network/dio_network.dart';
+import 'package:stories_app_flutter/src/core/network/rest_client.dart';
+import 'package:stories_app_flutter/src/core/util/injections.dart';
+import 'package:stories_app_flutter/src/features/ny_times_stories/data/data_sources/stories_api.dart';
 
 import 'data/data_sources/stories_shared_prefs.dart';
 import 'data/repositories/stories_repo_empl.dart';

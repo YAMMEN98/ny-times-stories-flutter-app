@@ -1,7 +1,7 @@
 import 'package:get_it/get_it.dart';
-import 'package:ny_times_stories_app_flutter/src/core/network/dio_network.dart';
-import 'package:ny_times_stories_app_flutter/src/core/util/log/app_logger.dart';
-import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/ny_times_story_injections.dart';
+import 'package:stories_app_flutter/src/core/network/dio_network.dart';
+import 'package:stories_app_flutter/src/core/util/log/app_logger.dart';
+import 'package:stories_app_flutter/src/features/ny_times_stories/ny_times_story_injections.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../common_feature/app_injections.dart';

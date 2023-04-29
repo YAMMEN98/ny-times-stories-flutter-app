@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ny_times_stories_app_flutter/src/core/common_feature/presentation/pages/background_page.dart';
-import 'package:ny_times_stories_app_flutter/src/core/common_feature/presentation/widgets/arrow_back_button_widget.dart';
-import 'package:ny_times_stories_app_flutter/src/core/common_feature/presentation/widgets/cached_image_widget.dart';
-import 'package:ny_times_stories_app_flutter/src/core/common_feature/presentation/widgets/custom_app_bar_widget.dart';
-import 'package:ny_times_stories_app_flutter/src/core/styles/app_colors.dart';
-import 'package:ny_times_stories_app_flutter/src/core/translations/l10n.dart';
-import 'package:ny_times_stories_app_flutter/src/core/util/constant/app_constants.dart';
-import 'package:ny_times_stories_app_flutter/src/core/util/helper/helper.dart';
-import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/data/entities/story_model.dart';
+import 'package:stories_app_flutter/src/core/common_feature/presentation/pages/background_page.dart';
+import 'package:stories_app_flutter/src/core/common_feature/presentation/widgets/arrow_back_button_widget.dart';
+import 'package:stories_app_flutter/src/core/common_feature/presentation/widgets/cached_image_widget.dart';
+import 'package:stories_app_flutter/src/core/common_feature/presentation/widgets/custom_app_bar_widget.dart';
+import 'package:stories_app_flutter/src/core/styles/app_colors.dart';
+import 'package:stories_app_flutter/src/core/translations/l10n.dart';
+import 'package:stories_app_flutter/src/core/util/constant/app_constants.dart';
+import 'package:stories_app_flutter/src/core/util/helper/helper.dart';
+import 'package:stories_app_flutter/src/features/ny_times_stories/data/entities/story_model.dart';
 
 class StoryDetailsPage extends StatefulWidget {
   final StoryModel model;

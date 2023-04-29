@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ny_times_stories_app_flutter/src/core/styles/app_colors.dart';
+import 'package:stories_app_flutter/src/core/styles/app_colors.dart';
 
 class DividerBottomSheetWidget extends StatelessWidget {
   final double? width;

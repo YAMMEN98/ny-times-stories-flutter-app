@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ny_times_stories_app_flutter/src/core/styles/app_colors.dart';
-import 'package:ny_times_stories_app_flutter/src/core/util/helper/helper.dart';
+import 'package:stories_app_flutter/src/core/styles/app_colors.dart';
+import 'package:stories_app_flutter/src/core/util/helper/helper.dart';
 
 class CustomAppBarWidget extends StatelessWidget {
   final double? height;

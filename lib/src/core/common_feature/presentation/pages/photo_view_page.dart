@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ny_times_stories_app_flutter/src/core/common_feature/presentation/pages/background_page.dart';
-import 'package:ny_times_stories_app_flutter/src/core/common_feature/presentation/widgets/arrow_back_button_widget.dart';
+import 'package:stories_app_flutter/src/core/common_feature/presentation/pages/background_page.dart';
+import 'package:stories_app_flutter/src/core/common_feature/presentation/widgets/arrow_back_button_widget.dart';
 import 'package:photo_view/photo_view.dart';
 
 class PhotoViewPage extends StatefulWidget {

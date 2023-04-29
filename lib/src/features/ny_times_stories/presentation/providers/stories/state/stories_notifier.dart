@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ny_times_stories_app_flutter/src/core/util/helper/helper_ui.dart';
-import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/data/entities/story_model.dart';
-import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/domain/usecases/stories_usecase.dart';
-import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/presentation/providers/stories/state/stories_state.dart';
+import 'package:stories_app_flutter/src/core/util/helper/helper_ui.dart';
+import 'package:stories_app_flutter/src/features/ny_times_stories/data/entities/story_model.dart';
+import 'package:stories_app_flutter/src/features/ny_times_stories/domain/usecases/stories_usecase.dart';
+import 'package:stories_app_flutter/src/features/ny_times_stories/presentation/providers/stories/state/stories_state.dart';
 
 class StoriesNotifier extends StateNotifier<StoriesState> {
   final StoriesUseCase storiesUseCase;

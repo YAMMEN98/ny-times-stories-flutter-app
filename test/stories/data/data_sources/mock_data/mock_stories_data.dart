@@ -1,6 +1,6 @@
 
-import 'package:ny_times_stories_app_flutter/src/core/common_feature/data/entities/api_response_model.dart';
-import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/data/entities/story_model.dart';
+import 'package:stories_app_flutter/src/core/common_feature/data/entities/api_response_model.dart';
+import 'package:stories_app_flutter/src/features/ny_times_stories/data/entities/story_model.dart';
 
 ApiResponse<List<StoryModel>> mockEmptyListData = ApiResponse(
   status: "OK",

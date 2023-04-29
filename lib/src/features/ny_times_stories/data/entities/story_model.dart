@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/data/entities/multi_media_model.dart';
+import 'package:stories_app_flutter/src/features/ny_times_stories/data/entities/multi_media_model.dart';
 
 part 'story_model.g.dart';
 

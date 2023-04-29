@@ -8,11 +8,11 @@ import 'dart:typed_data' as _i7;
 
 import 'package:dio/dio.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:ny_times_stories_app_flutter/src/core/common_feature/data/entities/api_response_model.dart'
+import 'package:stories_app_flutter/src/core/common_feature/data/entities/api_response_model.dart'
     as _i2;
-import 'package:ny_times_stories_app_flutter/src/core/network/rest_client.dart'
+import 'package:stories_app_flutter/src/core/network/rest_client.dart'
     as _i4;
-import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/data/entities/story_model.dart'
+import 'package:stories_app_flutter/src/features/ny_times_stories/data/entities/story_model.dart'
     as _i6;
 
 // ignore_for_file: type=lint

@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ny_times_stories_app_flutter/src/core/common_feature/presentation/pages/photo_view_page.dart';
-import 'package:ny_times_stories_app_flutter/src/core/common_feature/presentation/pages/web_view_page.dart';
-import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/data/entities/story_model.dart';
-import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/presentation/pages/stories_page.dart';
-import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/presentation/pages/story_details_page.dart';
+import 'package:stories_app_flutter/src/core/common_feature/presentation/pages/photo_view_page.dart';
+import 'package:stories_app_flutter/src/core/common_feature/presentation/pages/web_view_page.dart';
+import 'package:stories_app_flutter/src/features/ny_times_stories/data/entities/story_model.dart';
+import 'package:stories_app_flutter/src/features/ny_times_stories/presentation/pages/stories_page.dart';
+import 'package:stories_app_flutter/src/features/ny_times_stories/presentation/pages/story_details_page.dart';
 
 class AppRouter {
   static String currentRoute = "/";

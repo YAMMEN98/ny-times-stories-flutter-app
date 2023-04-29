@@ -1,12 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:ny_times_stories_app_flutter/src/core/common_feature/data/entities/api_response_model.dart';
-import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/data/data_sources/stories_api.dart';
-import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/data/entities/story_model.dart';
-import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/data/repositories/stories_repo_empl.dart';
-import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/domain/repositories/stories_repository.dart';
-import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/domain/usecases/stories_usecase.dart';
+import 'package:stories_app_flutter/src/core/common_feature/data/entities/api_response_model.dart';
+import 'package:stories_app_flutter/src/features/ny_times_stories/data/data_sources/stories_api.dart';
+import 'package:stories_app_flutter/src/features/ny_times_stories/data/entities/story_model.dart';
+import 'package:stories_app_flutter/src/features/ny_times_stories/data/repositories/stories_repo_empl.dart';
+import 'package:stories_app_flutter/src/features/ny_times_stories/domain/repositories/stories_repository.dart';
+import 'package:stories_app_flutter/src/features/ny_times_stories/domain/usecases/stories_usecase.dart';
 
 import 'mock_data/mock_stories_data.dart';
 import 'stories_repository_impl_test.mocks.dart';

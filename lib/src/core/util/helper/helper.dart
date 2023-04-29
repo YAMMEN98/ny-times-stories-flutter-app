@@ -1,7 +1,7 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:ny_times_stories_app_flutter/src/core/common_feature/data/entities/language_enum.dart';
-import 'package:ny_times_stories_app_flutter/src/core/util/constant/app_constants.dart';
+import 'package:stories_app_flutter/src/core/common_feature/data/entities/language_enum.dart';
+import 'package:stories_app_flutter/src/core/util/constant/app_constants.dart';
 
 import '../../common_feature/data/data_sources/app_shared_prefs.dart';
 import '../injections.dart';

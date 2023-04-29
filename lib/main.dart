@@ -5,12 +5,12 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as fv;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ny_times_stories_app_flutter/src/core/common_feature/presentation/providers/language_provider.dart';
-import 'package:ny_times_stories_app_flutter/src/core/styles/app_theme.dart';
-import 'package:ny_times_stories_app_flutter/src/core/translations/l10n.dart';
-import 'package:ny_times_stories_app_flutter/src/core/util/injections.dart';
-import 'package:ny_times_stories_app_flutter/src/core/util/router.dart';
-import 'package:ny_times_stories_app_flutter/src/features/intro/presentation/pages/intro_page.dart';
+import 'package:stories_app_flutter/src/core/common_feature/presentation/providers/language_provider.dart';
+import 'package:stories_app_flutter/src/core/styles/app_theme.dart';
+import 'package:stories_app_flutter/src/core/translations/l10n.dart';
+import 'package:stories_app_flutter/src/core/util/injections.dart';
+import 'package:stories_app_flutter/src/core/util/router.dart';
+import 'package:stories_app_flutter/src/features/intro/presentation/pages/intro_page.dart';
 
 import 'src/core/common_feature/presentation/providers/theme_provider.dart';
 

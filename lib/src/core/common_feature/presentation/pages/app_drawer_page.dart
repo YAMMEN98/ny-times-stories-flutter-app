@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ny_times_stories_app_flutter/src/core/common_feature/data/data_sources/app_shared_prefs.dart';
-import 'package:ny_times_stories_app_flutter/src/core/common_feature/data/entities/language_enum.dart';
-import 'package:ny_times_stories_app_flutter/src/core/common_feature/presentation/providers/language_provider.dart';
-import 'package:ny_times_stories_app_flutter/src/core/common_feature/presentation/providers/theme_provider.dart';
-import 'package:ny_times_stories_app_flutter/src/core/translations/l10n.dart';
-import 'package:ny_times_stories_app_flutter/src/core/util/helper/helper.dart';
-import 'package:ny_times_stories_app_flutter/src/core/util/injections.dart';
+import 'package:stories_app_flutter/src/core/common_feature/data/data_sources/app_shared_prefs.dart';
+import 'package:stories_app_flutter/src/core/common_feature/data/entities/language_enum.dart';
+import 'package:stories_app_flutter/src/core/common_feature/presentation/providers/language_provider.dart';
+import 'package:stories_app_flutter/src/core/common_feature/presentation/providers/theme_provider.dart';
+import 'package:stories_app_flutter/src/core/translations/l10n.dart';
+import 'package:stories_app_flutter/src/core/util/helper/helper.dart';
+import 'package:stories_app_flutter/src/core/util/injections.dart';
 
 class AppDrawerPage extends StatefulWidget {
   const AppDrawerPage({Key? key}) : super(key: key);

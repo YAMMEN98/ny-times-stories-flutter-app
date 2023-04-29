@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ny_times_stories_app_flutter/src/core/translations/l10n.dart';
+import 'package:stories_app_flutter/src/core/translations/l10n.dart';
 
 import 'base_validator.dart';
 

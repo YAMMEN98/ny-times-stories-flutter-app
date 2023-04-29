@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:ny_times_stories_app_flutter/src/core/common_feature/data/entities/api_response_model.dart';
-import 'package:ny_times_stories_app_flutter/src/core/network/error/dio_error_handler.dart';
-import 'package:ny_times_stories_app_flutter/src/core/network/error/exceptions.dart';
-import 'package:ny_times_stories_app_flutter/src/core/network/rest_client.dart';
-import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/data/entities/story_model.dart';
+import 'package:stories_app_flutter/src/core/common_feature/data/entities/api_response_model.dart';
+import 'package:stories_app_flutter/src/core/network/error/dio_error_handler.dart';
+import 'package:stories_app_flutter/src/core/network/error/exceptions.dart';
+import 'package:stories_app_flutter/src/core/network/rest_client.dart';
+import 'package:stories_app_flutter/src/features/ny_times_stories/data/entities/story_model.dart';
 
 class StoriesApi {
   final RestClient restClient;
