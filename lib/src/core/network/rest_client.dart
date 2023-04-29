@@ -11,10 +11,11 @@ abstract class RestClient {
   factory RestClient(Dio dio, {String baseUrl}) = _RestClient;
 
   @GET("{section}.json?api-key=$apiKey")
-  Future<HttpResponse<ApiResponse<List<StoryModel>>>> getStories(
+  Future<ApiResponse<List<StoryModel>>> getStories(
       @Path() String section);
 }
 
+// StoryModel.fromJsonList
 // final value = ApiResponse<List<StoryModel>>.fromJson(_result.data!, StoryModel.fromJsonList);
 // final httpResponse = HttpResponse<ApiResponse<List<StoryModel>>>(value, _result);
 // return httpResponse;

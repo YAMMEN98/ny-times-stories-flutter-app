@@ -5,22 +5,22 @@ import 'package:ny_times_stories_app_flutter/src/core/network/error/exceptions.d
 import 'package:ny_times_stories_app_flutter/src/core/network/rest_client.dart';
 import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/data/entities/story_model.dart';
 
-class NyTimesStoriesApi {
+class StoriesApi {
   final RestClient restClient;
 
   CancelToken cancelToken = CancelToken();
 
-  NyTimesStoriesApi(this.restClient);
+  StoriesApi(this.restClient);
 
-  /// NyTimes method
-  Future<ApiResponse<List<StoryModel>>> getNyTimesData(String section) async {
+  /// Get stories method
+  Future<ApiResponse<List<StoryModel>>> getStories(String section) async {
     try {
       final result = (await restClient.getStories(section));
-      if (result.data.results == null) {
-        throw ServerException("Unknown Error", result.response.statusCode);
+      if (result.results == null) {
+        throw ServerException("Unknown Error", null);
       }
 
-      return result.data;
+      return result;
     } on DioError catch (e) {
       if (e.type == DioErrorType.cancel) {
         throw CancelTokenException(handleDioError(e), e.response?.statusCode);

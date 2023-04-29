@@ -6,46 +6,46 @@ part 'story_model.g.dart';
 @JsonSerializable(fieldRename: FieldRename.snake)
 class StoryModel {
   StoryModel({
-    required this.section,
-    required this.subsection,
-    required this.title,
-    required this.abstract,
-    required this.url,
-    required this.uri,
-    required this.byline,
-    required this.itemType,
-    required this.updatedDate,
-    required this.createdDate,
-    required this.publishedDate,
-    required this.materialTypeFacet,
-    required this.kicker,
-    required this.desFacet,
-    required this.orgFacet,
-    required this.perFacet,
-    required this.geoFacet,
+     this.section,
+     this.subsection,
+     this.title,
+     this.abstract,
+     this.url,
+     this.uri,
+     this.byline,
+     this.itemType,
+     this.updatedDate,
+     this.createdDate,
+     this.publishedDate,
+     this.materialTypeFacet,
+     this.kicker,
+     this.desFacet,
+     this.orgFacet,
+     this.perFacet,
+     this.geoFacet,
     this.multimedia,
-    required this.shortUrl,
+     this.shortUrl,
   });
 
-  late final String section;
+  late final String? section;
   late final String? subsection;
   late final String? title;
   late final String? abstract;
   late final String? url;
-  late final String uri;
+  late final String? uri;
   late final String? byline;
-  late final String itemType;
-  late final String updatedDate;
-  late final String createdDate;
+  late final String? itemType;
+  late final String? updatedDate;
+  late final String? createdDate;
   late final String? publishedDate;
-  late final String materialTypeFacet;
-  late final String kicker;
-  late final List<String> desFacet;
-  late final List<String> orgFacet;
-  late final List<String> perFacet;
-  late final List<String> geoFacet;
+  late final String? materialTypeFacet;
+  late final String? kicker;
+  late final List<String>? desFacet;
+  late final List<String>? orgFacet;
+  late final List<String>? perFacet;
+  late final List<String>? geoFacet;
   late final List<MultiMediaModel>? multimedia;
-  late final String shortUrl;
+  late final String? shortUrl;
 
   factory StoryModel.fromJson(json) => _$StoryModelFromJson(json);
 
@@ -53,5 +53,20 @@ class StoryModel {
 
   static List<StoryModel> fromJsonList(List json) {
     return json.map((e) => StoryModel.fromJson(e)).toList();
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other.runtimeType != runtimeType) {
+      return false;
+    }
+    if (other is StoryModel) {
+      return other.section == section;
+    }
+
+    return false;
   }
 }

@@ -2,12 +2,12 @@ import 'package:flutter/foundation.dart';
 
 class ApiResponse<T> {
   ApiResponse({
-    required this.status,
-    required this.copyright,
-    required this.section,
-    required this.last_updated,
-    required this.numResults,
-    required this.results,
+     this.status,
+     this.copyright,
+     this.section,
+     this.last_updated,
+     this.numResults,
+     this.results,
   });
 
   late final String? status;

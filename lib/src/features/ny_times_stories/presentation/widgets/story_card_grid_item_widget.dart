@@ -126,6 +126,9 @@ class _StoryCardGridItemWidgetState extends State<StoryCardGridItemWidget> {
                               .textTheme
                               .bodyLarge!
                               .copyWith(color: AppColors.darkGray),
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                          softWrap: true,
                         ),
 
                         // Space
@@ -142,6 +145,9 @@ class _StoryCardGridItemWidgetState extends State<StoryCardGridItemWidget> {
                               .textTheme
                               .titleSmall!
                               .copyWith(color: AppColors.darkGray),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          softWrap: true,
                         ),
                       ],
                     ),

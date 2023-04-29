@@ -21,14 +21,13 @@ class _RestClient implements RestClient {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<ApiResponse<List<StoryModel>>>> getStories(
-      section) async {
+  Future<ApiResponse<List<StoryModel>>> getStories(section) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<ApiResponse<List<StoryModel>>>>(Options(
+        _setStreamType<ApiResponse<List<StoryModel>>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -40,9 +39,8 @@ class _RestClient implements RestClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-          final value = ApiResponse<List<StoryModel>>.fromJson(_result.data!, StoryModel.fromJsonList);
-          final httpResponse = HttpResponse<ApiResponse<List<StoryModel>>>(value, _result);
-          return httpResponse;
+    final value = ApiResponse<List<StoryModel>>.fromJson(_result.data!, StoryModel.fromJsonList);
+    return value;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

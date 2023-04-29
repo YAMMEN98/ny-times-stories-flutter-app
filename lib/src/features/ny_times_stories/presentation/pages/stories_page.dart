@@ -15,7 +15,7 @@ import 'package:ny_times_stories_app_flutter/src/core/util/helper/helper.dart';
 import 'package:ny_times_stories_app_flutter/src/core/util/helper/helper_ui.dart';
 import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/data/entities/section_story_enum.dart';
 import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/data/entities/story_model.dart';
-import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/domain/usecases/ny_times_stories_usecase.dart';
+import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/domain/usecases/stories_usecase.dart';
 import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/presentation/providers/search/search_providers.dart';
 import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/presentation/providers/stories/stories_providers.dart';
 import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/presentation/widgets/story_card_grid_item_widget.dart';
@@ -361,8 +361,9 @@ class _StoriesPageState extends ConsumerState<StoriesPage> {
         backgroundColor: isListView
             ? Theme.of(context).textTheme.bodyLarge!.color!.withOpacity(0.5)
             : AppColors.transparent,
+        radius: 15.sp,
+
         child: IconButton(
-          constraints: BoxConstraints(),
           padding: EdgeInsets.zero,
           onPressed: () {
             setState(() {
@@ -384,20 +385,22 @@ class _StoriesPageState extends ConsumerState<StoriesPage> {
         backgroundColor: !isListView
             ? Theme.of(context).textTheme.bodyLarge!.color!.withOpacity(0.5)
             : AppColors.transparent,
-        child: IconButton(
-          constraints: BoxConstraints(),
-          padding: EdgeInsets.zero,
-          onPressed: () {
-            setState(() {
-              isListView = false;
-            });
-          },
-          icon: Icon(
-            Icons.grid_view_rounded,
-            color: !isListView
-                ? Theme.of(context).scaffoldBackgroundColor
-                : Theme.of(context).iconTheme.color,
-            size: 20.sp,
+        radius: 15.sp,
+        child: Center(
+          child: IconButton(
+            padding: EdgeInsets.zero,
+            onPressed: () {
+              setState(() {
+                isListView = false;
+              });
+            },
+            icon: Icon(
+              Icons.grid_view_rounded,
+              color: !isListView
+                  ? Theme.of(context).scaffoldBackgroundColor
+                  : Theme.of(context).iconTheme.color,
+              size: 20.sp,
+            ),
           ),
         ),
       ),
