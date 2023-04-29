@@ -31,7 +31,7 @@ Stories, display story details, and see more about details.
 - View story details from url by ```WebView```
 - Created a lane in ```.github/workflows/generate_apk.yaml``` to generate apk automatically when upload code to the main branch.
 
-  ![Github Action](https://github.com/YAMMEN98/ny-times-stories-flutter-app/blob/main/lane.png)
+  ![Github Action](https://github.com/YAMMEN98/ny-times-flutter-app/blob/main/lane.png)
 
 - Apply Unit Testing .
 
