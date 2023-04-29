@@ -1,4 +1,4 @@
-# stories_app
+# New York Times Stories App
 
 A new Flutter project with Clean Architecture to fetch thw New Work Time
 Stories, display story details, and see more about details.
@@ -70,7 +70,7 @@ report, follow these steps to run it:
 
 ## Note:
 
-I had covered Api and Repository layer in Unit Test cause the time, of course i can cover all app if i have time.
+I had covered Api and Repository layer in Unit Test cause the time, of course I can cover all app if I have time.
 
 ## Author
 
