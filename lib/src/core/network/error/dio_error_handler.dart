@@ -77,12 +77,17 @@ String handleDioError(DioError error) {
       break;
     case DioErrorType.badCertificate:
       // TODO: Handle this case.
+      errorDescription = "Bad Certificate";
+
       break;
     case DioErrorType.connectionError:
       // TODO: Handle this case.
+      errorDescription = "Connection Error";
+
       break;
     case DioErrorType.unknown:
-      // TODO: Handle this case.
+      errorDescription = "Unknown Error";
+
       break;
   }
 

@@ -32,7 +32,7 @@ class StoriesNotifier extends StateNotifier<StoriesState> {
     );
   }
 
-  // Get Stories
+  // Get stories by input entered
   Future<void> getSearchedStories(String text) async {
     // Loading state
     state = const StoriesState.loading();

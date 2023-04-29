@@ -22,11 +22,7 @@ class StoriesApi {
 
       return result;
     } on DioError catch (e) {
-      if (e.type == DioErrorType.cancel) {
-        throw CancelTokenException(handleDioError(e), e.response?.statusCode);
-      } else {
-        throw ServerException(handleDioError(e), e.response?.statusCode);
-      }
+      throw ServerException(handleDioError(e), e.response?.statusCode);
     } on ServerException {
       rethrow;
     } catch (e) {
