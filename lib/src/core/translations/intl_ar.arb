@@ -8,6 +8,8 @@
   "light_skin": "المظهر النهاري",
   "language": "اللغة",
   "search_by_section": "البحص عن طريق القسم",
-  "section": "القسم"
-
+  "section": "القسم",
+  "reset": "تهيئة",
+  "confirm": "تأكيد",
+  "no_data": "لا يوجد بيانات"
 }

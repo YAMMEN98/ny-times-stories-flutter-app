@@ -1,17 +1,24 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ny_times_stories_app_flutter/src/core/util/helper/helper.dart';
+import 'package:ny_times_stories_app_flutter/src/core/util/helper/helper_ui.dart';
 import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/data/entities/section_story_enum.dart';
+import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/data/entities/story_model.dart';
 import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/domain/usecases/ny_times_stories_usecase.dart';
 import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/presentation/providers/stories/state/stories_state.dart';
 
 class StoriesNotifier extends StateNotifier<StoriesState> {
   final StoriesUseCase storiesUseCase;
 
+  // All stories result
+  List<StoryModel> allStories = [];
+
+
   StoriesNotifier({
     required this.storiesUseCase,
   }) : super(const StoriesState.initial());
 
   // Get Stories
-  Future<void> getStories(StoriesParams params) async {
+  Future<void> getStories(StoriesParams params, {String? text}) async {
     // Loading state
     state = const StoriesState.loading();
 
@@ -22,9 +29,19 @@ class StoriesNotifier extends StateNotifier<StoriesState> {
         return StoriesState.failure(failure.errorMessage);
       },
           (stories) async {
-        return const StoriesState.success();
+            allStories =stories;
+        return  StoriesState.success(HelperUi.runFilter(text??"", allStories));
       },
     );
+  }
+
+
+  // Get Stories
+  Future<void> getSearchedStories(String text) async {
+    // Loading state
+    state = const StoriesState.loading();
+
+    state = StoriesState.success(HelperUi.runFilter(text, allStories));
   }
 
 

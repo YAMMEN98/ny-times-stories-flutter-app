@@ -27,16 +27,16 @@ class StoryModel {
     required this.shortUrl,
   });
   late final String section;
-  late final String subsection;
-  late final String title;
-  late final String abstract;
-  late final String url;
+  late final String? subsection;
+  late final String? title;
+  late final String? abstract;
+  late final String? url;
   late final String uri;
-  late final String byline;
+  late final String? byline;
   late final String itemType;
   late final String updatedDate;
   late final String createdDate;
-  late final String publishedDate;
+  late final String? publishedDate;
   late final String materialTypeFacet;
   late final String kicker;
   late final List<String> desFacet;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ArrowBackButtonWidget extends StatelessWidget {
   final Function()? callback;
@@ -21,6 +22,8 @@ class ArrowBackButtonWidget extends StatelessWidget {
         icon: Icon(
           Icons.arrow_back,
           color: iconColor ?? Theme.of(context).iconTheme.color,
+          size: 20.sp,
+
         ),
       ),
     );

@@ -109,6 +109,7 @@ dependencies:
   # DropDown Search
   dropdown_search: ^5.0.6
 
+  flutter_layout_grid: ^2.0.1
 
 dev_dependencies:
   flutter_test:

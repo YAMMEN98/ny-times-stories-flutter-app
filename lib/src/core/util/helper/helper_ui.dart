@@ -1,16 +1,11 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ny_times_stories_app_flutter/generated/l10n.dart';
-import 'package:ny_times_stories_app_flutter/src/core/common_feature/data/entities/language_enum.dart';
 import 'package:ny_times_stories_app_flutter/src/core/common_feature/presentation/widgets/arrow_back_button_widget.dart';
 import 'package:ny_times_stories_app_flutter/src/core/common_feature/presentation/widgets/button_widget.dart';
 import 'package:ny_times_stories_app_flutter/src/core/styles/app_colors.dart';
+import 'package:ny_times_stories_app_flutter/src/core/translations/l10n.dart';
 import 'package:ny_times_stories_app_flutter/src/core/util/constant/app_constants.dart';
-
-import '../../common_feature/data/data_sources/app_shared_prefs.dart';
-import '../injections.dart';
+import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/data/entities/story_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
 
 class HelperUi {
   static void showUpperSheetModal(BuildContext context, List<Widget> children,
@@ -41,6 +36,7 @@ class HelperUi {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          // Keep row for widget direction in en/ar
                           GestureDetector(
                             behavior: HitTestBehavior.opaque,
                             onTap: () {
@@ -50,17 +46,7 @@ class HelperUi {
                               iconColor: Theme.of(context).iconTheme.color!,
                             ),
                           ),
-                          GestureDetector(
-                            behavior: HitTestBehavior.opaque,
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: Icon(
-                              Icons.filter_alt,
-                              color: Theme.of(context).iconTheme.color,
-                              size: 30.h,
-                            ),
-                          ),
+
                         ],
                       ),
                       SizedBox(
@@ -72,7 +58,7 @@ class HelperUi {
                           Expanded(
                             child: ButtonWidget(
                               backgroundColor: AppColors.transparent,
-                              text: "reset",
+                              text: S.of(context).reset,
                               onPressed: () {
                                 if (reset != null) {
                                   reset();
@@ -94,7 +80,7 @@ class HelperUi {
                           Expanded(
                             child: ButtonWidget(
                               backgroundColor: AppColors.transparent,
-                              text: "confirm",
+                              text: S.of(context).confirm,
                               onPressed: () {
                                 if (confirm != null) {
                                   confirm();
@@ -136,5 +122,31 @@ class HelperUi {
         );
       },
     );
+  }
+
+  static List<T> runFilter<T>(
+      String text,
+      List<T> allResult
+      ) {
+    List<T> results = [];
+    if (text.isEmpty) {
+      // if the search field is empty or only contains white-space, we'll display all users
+      results = List.from(allResult);
+    } else {
+      results = allResult.where((user) {
+        /// (*)
+        // Story Model
+        if(user is StoryModel){
+          return (user.title?? defaultStr)
+              .toLowerCase()
+              .contains(text.toLowerCase());
+        }
+
+        // Not a ty[e on if condition on (*)
+        return false;
+
+      }).toList();
+    }
+    return results;
   }
 }

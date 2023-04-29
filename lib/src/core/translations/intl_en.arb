@@ -8,5 +8,8 @@
   "light_skin": "Light Skin",
   "language": "Language",
   "search_by_section": "Search by section",
-  "section": "Section"
+  "section": "Section",
+  "reset": "Reset",
+  "confirm": "Confirm",
+  "no_data": "No Data"
 }

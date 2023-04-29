@@ -21,7 +21,7 @@ mixin _$StoriesState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(String error) failure,
-    required TResult Function() success,
+    required TResult Function(List<StoryModel> stories) success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,7 +29,7 @@ mixin _$StoriesState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String error)? failure,
-    TResult? Function()? success,
+    TResult? Function(List<StoryModel> stories)? success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,7 +37,7 @@ mixin _$StoriesState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String error)? failure,
-    TResult Function()? success,
+    TResult Function(List<StoryModel> stories)? success,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -125,7 +125,7 @@ class _$Initial implements Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(String error) failure,
-    required TResult Function() success,
+    required TResult Function(List<StoryModel> stories) success,
   }) {
     return initial();
   }
@@ -136,7 +136,7 @@ class _$Initial implements Initial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String error)? failure,
-    TResult? Function()? success,
+    TResult? Function(List<StoryModel> stories)? success,
   }) {
     return initial?.call();
   }
@@ -147,7 +147,7 @@ class _$Initial implements Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String error)? failure,
-    TResult Function()? success,
+    TResult Function(List<StoryModel> stories)? success,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -237,7 +237,7 @@ class _$Loading implements Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(String error) failure,
-    required TResult Function() success,
+    required TResult Function(List<StoryModel> stories) success,
   }) {
     return loading();
   }
@@ -248,7 +248,7 @@ class _$Loading implements Loading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String error)? failure,
-    TResult? Function()? success,
+    TResult? Function(List<StoryModel> stories)? success,
   }) {
     return loading?.call();
   }
@@ -259,7 +259,7 @@ class _$Loading implements Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String error)? failure,
-    TResult Function()? success,
+    TResult Function(List<StoryModel> stories)? success,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -375,7 +375,7 @@ class _$Failure implements Failure {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(String error) failure,
-    required TResult Function() success,
+    required TResult Function(List<StoryModel> stories) success,
   }) {
     return failure(error);
   }
@@ -386,7 +386,7 @@ class _$Failure implements Failure {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String error)? failure,
-    TResult? Function()? success,
+    TResult? Function(List<StoryModel> stories)? success,
   }) {
     return failure?.call(error);
   }
@@ -397,7 +397,7 @@ class _$Failure implements Failure {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String error)? failure,
-    TResult Function()? success,
+    TResult Function(List<StoryModel> stories)? success,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -457,6 +457,8 @@ abstract class Failure implements StoriesState {
 abstract class _$$SuccessCopyWith<$Res> {
   factory _$$SuccessCopyWith(_$Success value, $Res Function(_$Success) then) =
       __$$SuccessCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<StoryModel> stories});
 }
 
 /// @nodoc
@@ -465,26 +467,56 @@ class __$$SuccessCopyWithImpl<$Res>
     implements _$$SuccessCopyWith<$Res> {
   __$$SuccessCopyWithImpl(_$Success _value, $Res Function(_$Success) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? stories = null,
+  }) {
+    return _then(_$Success(
+      null == stories
+          ? _value._stories
+          : stories // ignore: cast_nullable_to_non_nullable
+              as List<StoryModel>,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$Success implements Success {
-  const _$Success();
+  const _$Success(final List<StoryModel> stories) : _stories = stories;
+
+  final List<StoryModel> _stories;
+  @override
+  List<StoryModel> get stories {
+    if (_stories is EqualUnmodifiableListView) return _stories;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_stories);
+  }
 
   @override
   String toString() {
-    return 'StoriesState.success()';
+    return 'StoriesState.success(stories: $stories)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Success);
+        (other.runtimeType == runtimeType &&
+            other is _$Success &&
+            const DeepCollectionEquality().equals(other._stories, _stories));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_stories));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SuccessCopyWith<_$Success> get copyWith =>
+      __$$SuccessCopyWithImpl<_$Success>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -492,9 +524,9 @@ class _$Success implements Success {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(String error) failure,
-    required TResult Function() success,
+    required TResult Function(List<StoryModel> stories) success,
   }) {
-    return success();
+    return success(stories);
   }
 
   @override
@@ -503,9 +535,9 @@ class _$Success implements Success {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String error)? failure,
-    TResult? Function()? success,
+    TResult? Function(List<StoryModel> stories)? success,
   }) {
-    return success?.call();
+    return success?.call(stories);
   }
 
   @override
@@ -514,11 +546,11 @@ class _$Success implements Success {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String error)? failure,
-    TResult Function()? success,
+    TResult Function(List<StoryModel> stories)? success,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success();
+      return success(stories);
     }
     return orElse();
   }
@@ -562,5 +594,10 @@ class _$Success implements Success {
 }
 
 abstract class Success implements StoriesState {
-  const factory Success() = _$Success;
+  const factory Success(final List<StoryModel> stories) = _$Success;
+
+  List<StoryModel> get stories;
+  @JsonKey(ignore: true)
+  _$$SuccessCopyWith<_$Success> get copyWith =>
+      throw _privateConstructorUsedError;
 }

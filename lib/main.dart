@@ -28,7 +28,6 @@ void main() async {
     enabled: false,
   ));
 
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
 }
 

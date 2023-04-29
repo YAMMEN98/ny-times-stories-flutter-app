@@ -55,6 +55,8 @@ class ReloadWidget extends StatelessWidget {
             Icon(
               Icons.refresh,
               color: iconColor ?? AppColors.black,
+              size: 20.sp,
+
             ),
         ],
       ),

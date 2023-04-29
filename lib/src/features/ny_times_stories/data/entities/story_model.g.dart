@@ -8,16 +8,16 @@ part of 'story_model.dart';
 
 StoryModel _$StoryModelFromJson(Map<String, dynamic> json) => StoryModel(
       section: json['section'] as String,
-      subsection: json['subsection'] as String,
-      title: json['title'] as String,
-      abstract: json['abstract'] as String,
-      url: json['url'] as String,
+      subsection: json['subsection'] as String?,
+      title: json['title'] as String?,
+      abstract: json['abstract'] as String?,
+      url: json['url'] as String?,
       uri: json['uri'] as String,
-      byline: json['byline'] as String,
+      byline: json['byline'] as String?,
       itemType: json['item_type'] as String,
       updatedDate: json['updated_date'] as String,
       createdDate: json['created_date'] as String,
-      publishedDate: json['published_date'] as String,
+      publishedDate: json['published_date'] as String?,
       materialTypeFacet: json['material_type_facet'] as String,
       kicker: json['kicker'] as String,
       desFacet:

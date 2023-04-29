@@ -66,7 +66,7 @@ final ThemeData appTheme = ThemeData(
 /// Dark theme
 final ThemeData darkAppTheme = ThemeData(
   dialogBackgroundColor: AppColors.primaryColor,
-  cardColor: AppColors.orange.withOpacity(0.5),
+  cardColor: AppColors.white,
   appBarTheme: AppBarTheme(
     shadowColor: AppColors.white,
     color: AppColors.darkGray,

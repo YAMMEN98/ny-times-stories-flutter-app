@@ -55,26 +55,27 @@ class _PhotoViewPageState extends State<PhotoViewPage> {
 
   // Build photo view from asset or url
   Widget _buildPhotoView() {
+    late ImageProvider image;
+
     // Path is url from net
     if (widget.fromNet) {
-      return Hero(
-        tag: widget.path,
-        child: PhotoView(
-          imageProvider: CachedNetworkImageProvider(
-            widget.path,
-          ),
-        ),
+      image = CachedNetworkImageProvider(
+        widget.path,
       );
     } else {
       // Path is path from asset
-      return Hero(
-        tag: widget.path,
-        child: PhotoView(
-          imageProvider: AssetImage(
-            widget.path,
-          ),
-        ),
+      image = AssetImage(
+        widget.path,
       );
     }
+
+    return Hero(
+      tag: widget.path,
+      child: PhotoView(
+        minScale: PhotoViewComputedScale.contained * 0.8,
+        maxScale: PhotoViewComputedScale.covered * 2,
+        imageProvider: image,
+      ),
+    );
   }
 }

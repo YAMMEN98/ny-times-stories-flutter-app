@@ -41,9 +41,9 @@ class _RestClient implements RestClient {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
 
-final value = ApiResponse<List<StoryModel>>.fromJson(_result.data!, StoryModel.fromJsonList);
-final httpResponse = HttpResponse<ApiResponse<List<StoryModel>>>(value, _result);
-return httpResponse;
+          final value = ApiResponse<List<StoryModel>>.fromJson(_result.data!, StoryModel.fromJsonList);
+          final httpResponse = HttpResponse<ApiResponse<List<StoryModel>>>(value, _result);
+          return httpResponse;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

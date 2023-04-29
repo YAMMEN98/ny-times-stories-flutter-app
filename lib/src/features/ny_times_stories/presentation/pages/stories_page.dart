@@ -6,27 +6,32 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ny_times_stories_app_flutter/src/core/common_feature/presentation/pages/background_page.dart';
 import 'package:ny_times_stories_app_flutter/src/core/common_feature/presentation/widgets/app_loader.dart';
 import 'package:ny_times_stories_app_flutter/src/core/common_feature/presentation/widgets/custom_app_bar_widget.dart';
+import 'package:ny_times_stories_app_flutter/src/core/common_feature/presentation/widgets/divider_bottom_sheet_widget.dart';
 import 'package:ny_times_stories_app_flutter/src/core/common_feature/presentation/widgets/reload_widget.dart';
 import 'package:ny_times_stories_app_flutter/src/core/common_feature/presentation/widgets/text_field_widget.dart';
+import 'package:ny_times_stories_app_flutter/src/core/styles/app_colors.dart';
 import 'package:ny_times_stories_app_flutter/src/core/translations/l10n.dart';
 import 'package:ny_times_stories_app_flutter/src/core/util/helper/helper.dart';
 import 'package:ny_times_stories_app_flutter/src/core/util/helper/helper_ui.dart';
 import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/data/entities/section_story_enum.dart';
+import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/data/entities/story_model.dart';
+import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/domain/usecases/ny_times_stories_usecase.dart';
+import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/presentation/providers/search/search_providers.dart';
 import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/presentation/providers/stories/stories_providers.dart';
-import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/presentation/providers/stories_section/stories_section__providers.dart';
-import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/presentation/widgets/story_card_widget.dart';
+import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/presentation/widgets/story_card_grid_item_widget.dart';
+import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/presentation/widgets/story_card_list_item_widget.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-class StoriesPage extends StatefulWidget {
+class StoriesPage extends ConsumerStatefulWidget {
   static const String routeName = 'DashboardScreen';
 
   const StoriesPage({Key? key}) : super(key: key);
 
   @override
-  State<StoriesPage> createState() => _StoriesPageState();
+  ConsumerState<StoriesPage> createState() => _StoriesPageState();
 }
 
-class _StoriesPageState extends State<StoriesPage> {
+class _StoriesPageState extends ConsumerState<StoriesPage> {
   // Key for scaffold to open drawer
   GlobalKey<ScaffoldState> _key = GlobalKey();
 
@@ -38,21 +43,31 @@ class _StoriesPageState extends State<StoriesPage> {
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
 
+  // Selected story section
+  StorySectionEnum selectedStorySection = StorySectionEnum.home;
+  StorySectionEnum tempStorySection = StorySectionEnum.home;
+
+  // Grid/List View
+  bool isListView = true;
+
+  OutlineInputBorder defaultBorder = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(15),
+    borderSide: BorderSide(
+      color: AppColors.gray,
+      width: 1,
+    ),
+  );
+
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      // ref
-      //     .read(storiesStateNotifierProvider.notifier)
-      //     .getStories(StoriesParams("word"));
+      _getStories();
     });
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-
-
     return BackgroundPage(
       scaffoldKey: _key,
       withDrawer: true,
@@ -76,7 +91,7 @@ class _StoriesPageState extends State<StoriesPage> {
                           },
                           icon: Icon(
                             Icons.menu,
-                            size: 20,
+                            size: 20.sp,
                           ),
                         ),
 
@@ -85,27 +100,91 @@ class _StoriesPageState extends State<StoriesPage> {
                         ),
 
                         // Search
-                        Expanded(
-                          child: TextFieldWidget(
-                            controller: _searchController,
-                            focusNode: _searchFocusNode,
-                            hintText: S.of(context).search,
-                            onChanged: (value) {},
-                            suffixIcon: IconButton(
-                              padding: EdgeInsets.zero,
-                              constraints: BoxConstraints(),
-                              onPressed: () {
-                                setState(() {
-                                  _searchController.clear();
-                                });
+                        Expanded(child: Consumer(
+                          builder: (context, ref, child) {
+                            final searchState =
+                                ref.watch(searchStateNotifierProvider);
+                            return searchState.maybeMap(
+                              openSearch: (value) {
+                                return TextFieldWidget(
+                                  controller: _searchController,
+                                  focusNode: _searchFocusNode,
+                                  hintText: S.of(context).search,
+                                  onChanged: (value) {
+                                    if (value != null) {
+                                      _getSearchedStories(value.trim());
+                                    } else {
+                                      _getSearchedStories("");
+                                    }
+                                  },
+                                  suffixIcon: IconButton(
+                                    padding: EdgeInsets.zero,
+                                    constraints: BoxConstraints(),
+                                    onPressed: () {
+                                      setState(() {
+                                        _searchFocusNode.unfocus();
+                                        _searchController.clear();
+                                        _getSearchedStories("");
+                                        ref
+                                            .read(searchStateNotifierProvider
+                                                .notifier)
+                                            .closeSearch();
+                                      });
+                                    },
+                                    icon: Icon(
+                                      Icons.close,
+                                      size: 20.sp,
+                                    ),
+                                  ),
+                                );
                               },
-                              icon: Icon(
-                                Icons.close,
-                                size: 20,
-                              ),
-                            ),
-                          ),
-                        )
+                              closeSearch: (value) {
+                                return Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: IconButton(
+                                    padding: EdgeInsets.zero,
+                                    constraints: BoxConstraints(),
+                                    onPressed: () {
+                                      setState(() {
+                                        ref
+                                            .read(searchStateNotifierProvider
+                                                .notifier)
+                                            .openSearch();
+                                        _searchFocusNode.requestFocus();
+                                      });
+                                    },
+                                    icon: Icon(
+                                      Icons.search,
+                                      size: 20.sp,
+                                    ),
+                                  ),
+                                );
+                              },
+                              orElse: () {
+                                return Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: IconButton(
+                                    padding: EdgeInsets.zero,
+                                    constraints: BoxConstraints(),
+                                    onPressed: () {
+                                      setState(() {
+                                        ref
+                                            .read(searchStateNotifierProvider
+                                                .notifier)
+                                            .openSearch();
+                                        _searchFocusNode.requestFocus();
+                                      });
+                                    },
+                                    icon: Icon(
+                                      Icons.search,
+                                      size: 20.sp,
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        ))
                       ],
                     ),
                   ),
@@ -115,72 +194,50 @@ class _StoriesPageState extends State<StoriesPage> {
                   ),
 
                   // Filter
-                  Consumer(
-                    builder: (_, ref, __) {
+                  GestureDetector(
+                    onTap: () {
+                      FocusManager.instance.primaryFocus?.unfocus();
+                      late Function(void Function()) showUpperSheetState;
 
-                      return GestureDetector(
-                        onTap: () {
-                          FocusManager.instance.primaryFocus?.unfocus();
-                          late Function(void Function()) showUpperSheetState;
-                          HelperUi.showUpperSheetModal(
-                            context,
-                            [
-                              StatefulBuilder(builder: (context, setState) {
-                                showUpperSheetState = setState;
-                                return _buildFilterWidgets(showUpperSheetState);
-                              }),
-                            ],
-                            reset: () {},
-                            confirm: () {
-                              ref
-                                  .read(
-                                      storiesSectionStateNotifierProvider.notifier)
-                                  .changeStoriesSection(
-                                    StorySectionEnum.tMagazine,
-                                  );
-                            },
-                          );
+                      HelperUi.showUpperSheetModal(
+                        context,
+                        [
+                          StatefulBuilder(builder: (context, setState) {
+                            showUpperSheetState = setState;
+                            return _buildFilterWidgets(showUpperSheetState);
+                          }),
+                        ],
+                        reset: () {
+                          selectedStorySection = StorySectionEnum.home;
+                          tempStorySection = selectedStorySection;
+                          showUpperSheetState(() {});
                         },
-                        child: Row(
-                          children: [
-                            IconButton(
-                              constraints: BoxConstraints(),
-                              padding: EdgeInsets.zero,
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.filter_alt,
-                              ),
-                            ),
-                            Text(
-                              S.of(context).filter,
-                              style: Theme.of(context).textTheme.bodyLarge,
-                            )
-                          ],
-                        ),
+                        confirm: () {
+                          selectedStorySection = tempStorySection;
+                          _getStories();
+                        },
                       );
-                    }
-                  )
+                    },
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.filter_alt,
+                          size: 20.sp,
+                        ),
+                        SizedBox(
+                          width: 2.w,
+                        ),
+                        Text(
+                          S.of(context).filter,
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        )
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
-            actions: [
-              IconButton(
-                constraints: BoxConstraints(),
-                padding: EdgeInsets.zero,
-                onPressed: () {},
-                icon: Icon(
-                  Icons.format_list_bulleted,
-                ),
-              ),
-              IconButton(
-                constraints: BoxConstraints(),
-                padding: EdgeInsets.zero,
-                onPressed: () {},
-                icon: Icon(
-                  Icons.grid_view_rounded,
-                ),
-              ),
-            ],
+            actions: _buildActions(),
           ),
 
           // Space
@@ -189,59 +246,61 @@ class _StoriesPageState extends State<StoriesPage> {
           ),
 
           // Stories, Loading and Error Widget
-          Consumer(
-              builder: (_, ref, __) {
-                final storiesState = ref.watch(storiesStateNotifierProvider);
+          Consumer(builder: (_, ref, __) {
+            final storiesState = ref.watch(storiesStateNotifierProvider);
 
-                return Expanded(
-                child: storiesState.maybeMap(
-                  loading: (value) {
-                    return const AppLoader();
-                  },
-                  success: (value) {
-                    return _buildStories(context);
-                  },
-                  failure: (value) {
-                    return ReloadWidget.error(
-                      content: value.error,
-                      onPressed: () {},
+            return Expanded(
+              child: storiesState.maybeMap(
+                initial: (value) {
+                  return const AppLoader();
+                },
+                loading: (value) {
+                  return const AppLoader();
+                },
+                success: (value) {
+                  _refreshController.refreshCompleted(
+                    resetFooterState: true,
+                  );
+                  if (value.stories.isEmpty) {
+                    return ReloadWidget.empty(
+                      content: S.of(context).no_data,
+                      onPressed: () {
+                        _getStories();
+                      },
                     );
-                  },
-                  orElse: () {
-                    return Text("UnSupported Widget");
-                  },
-                ),
-              );
-            }
-          ),
+                  }
 
-          Consumer(
-              builder: (_, ref, __) {
-                final storiesSectionState = ref.watch(storiesSectionStateNotifierProvider);
-
-                return Expanded(
-                  child: storiesSectionState.maybeMap(
-                    changedStorySection: (value) {
-                      print(value.sectionStoryEnum);
-                      return Text("aaaaaa");
-                    },
-                    orElse: () {
-                      return Text("UnSupported Widget");
-                    },
-                  ),
-                );
-              }
-          ),
-
-
-
+                  if (isListView) {
+                    return _buildListStories(
+                      context,
+                      value.stories,
+                    );
+                  } else {
+                    return _buildGridViewStories(
+                      context,
+                      value.stories,
+                    );
+                  }
+                },
+                failure: (value) {
+                  return ReloadWidget.error(
+                    content: value.error,
+                    onPressed: () {},
+                  );
+                },
+                orElse: () {
+                  return Text("UnSupported Widget");
+                },
+              ),
+            );
+          }),
         ],
       ),
     );
   }
 
-// Stories, Loading and Error Widget
-  _buildStories(BuildContext context) {
+// Stories grid view, Loading and Error Widget
+  _buildListStories(BuildContext context, List<StoryModel> stories) {
     return SmartRefresher(
         enablePullDown: true,
         enablePullUp: false,
@@ -252,18 +311,91 @@ class _StoriesPageState extends State<StoriesPage> {
         onRefresh: _onRefresh,
         onLoading: null,
         child: ListView.builder(
-          itemCount: 10,
+          itemCount: stories.length,
           itemBuilder: (context, index) {
-            return StoryCardWidget();
+            return StoryCardListItemWidget(model: stories[index]);
           },
         ));
+  }
+
+  // Stories list , Loading and Error Widget
+  _buildGridViewStories(BuildContext context, List<StoryModel> stories) {
+    return SmartRefresher(
+      enablePullDown: true,
+      enablePullUp: false,
+      header: WaterDropHeader(
+        waterDropColor: Theme.of(context).cardColor,
+      ),
+      controller: _refreshController,
+      onRefresh: _onRefresh,
+      onLoading: null,
+      child: GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: MediaQuery.of(context).size.width /
+                (MediaQuery.of(context).size.height / 1.3),
+            mainAxisExtent: 250.h),
+        itemCount: stories.length,
+        itemBuilder: (context, index) {
+          return StoryCardGridItemWidget(
+            model: stories[index],
+          );
+        },
+      ),
+    );
   }
 
   // Refresh method called when pull down list
   void _onRefresh() async {
     _refreshController.requestRefresh();
+    _getStories();
   }
 
+  // Build actions in app bar
+  List<Widget> _buildActions() {
+    return [
+
+      // List view
+        CircleAvatar(
+          backgroundColor:isListView? Theme.of(context).textTheme.bodyLarge!.color!.withOpacity(0.5):AppColors.transparent,
+          child: IconButton(
+            constraints: BoxConstraints(),
+            padding: EdgeInsets.zero,
+            onPressed: () {
+              setState(() {
+                isListView = true;
+              });
+            },
+            icon: Icon(
+              Icons.format_list_bulleted,
+              color: isListView?Theme.of(context).scaffoldBackgroundColor:Theme.of(context).iconTheme.color,
+              size: 20.sp,
+            ),
+          ),
+        ),
+
+      // Grid view
+      CircleAvatar(
+        backgroundColor:!isListView? Theme.of(context).textTheme.bodyLarge!.color!.withOpacity(0.5):AppColors.transparent,
+        child: IconButton(
+          constraints: BoxConstraints(),
+          padding: EdgeInsets.zero,
+          onPressed: () {
+            setState(() {
+              isListView = false;
+            });
+          },
+          icon: Icon(
+            Icons.grid_view_rounded,
+            color: !isListView?Theme.of(context).scaffoldBackgroundColor:Theme.of(context).iconTheme.color,
+            size: 20.sp,
+          ),
+        ),
+      ),
+    ];
+  }
+
+  // Filter widget to filtering on stories
   Widget _buildFilterWidgets(showUpperSheetState) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -280,21 +412,106 @@ class _StoriesPageState extends State<StoriesPage> {
           height: 10.h,
         ),
 
-        DropdownSearch<StorySectionEnum>(
-          items: StorySectionEnum.values,
-          itemAsString: (StorySectionEnum u) => u.section,
-          onChanged: (StorySectionEnum? data) => print(data),
-          dropdownDecoratorProps: DropDownDecoratorProps(
-            dropdownSearchDecoration: InputDecoration(
-              labelText: S.of(context).search_by_section,
-            ),
-          ),
-        ),
+        _buildSearchDropdown(showUpperSheetState),
 
         SizedBox(
           height: 10.h,
         ),
       ],
     );
+  }
+
+  // Dropdown search for story section
+  _buildSearchDropdown(showUpperSheetState) {
+    return DropdownSearch<StorySectionEnum>(
+      enabled: true,
+      items: StorySectionEnum.values,
+      selectedItem: tempStorySection,
+      itemAsString: (StorySectionEnum u) => u.section,
+      onChanged: (StorySectionEnum? data) {
+        print(data);
+        if (data != null) {
+          showUpperSheetState(() {
+            tempStorySection = data;
+          });
+        }
+      },
+      dropdownDecoratorProps: DropDownDecoratorProps(
+        baseStyle: Theme.of(context).textTheme.bodyLarge,
+        dropdownSearchDecoration: InputDecoration(
+          border: defaultBorder,
+          focusedBorder: defaultBorder,
+          enabledBorder: defaultBorder,
+          labelText: S.of(context).search_by_section,
+          labelStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
+                color: AppColors.gray,
+              ),
+        ),
+      ),
+      popupProps: PopupProps.modalBottomSheet(
+        itemBuilder: (context, item, isSelected) {
+          return Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 12,
+              vertical: 15,
+            ),
+            child: Text(
+              item.section,
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+          );
+        },
+        showSearchBox: true,
+        title: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 12,
+            vertical: 15,
+          ),
+          child: Column(
+            children: [
+              DividerBottomSheetWidget(
+                width: ScreenUtil().screenWidth * 0.25,
+              ),
+              SizedBox(
+                height: Helper.getVerticalSpace(),
+              ),
+              Text(
+                S.of(context).search_by_section,
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+        searchFieldProps: TextFieldProps(
+          decoration: InputDecoration(
+            hintText: S.of(context).search,
+            hintStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
+                  color: AppColors.gray,
+                ),
+            border: defaultBorder,
+            focusedBorder: defaultBorder,
+            enabledBorder: defaultBorder,
+          ),
+        ),
+        modalBottomSheetProps: ModalBottomSheetProps(
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor),
+      ),
+    );
+  }
+
+  // Get all stories
+  void _getStories() {
+    ref.read(storiesStateNotifierProvider.notifier).getStories(
+          StoriesParams(selectedStorySection.section),
+          text: _searchController.text.trim(),
+        );
+  }
+
+  // Get stories after apply search
+  void _getSearchedStories(String text) {
+    ref.read(storiesStateNotifierProvider.notifier).getSearchedStories(text);
   }
 }
