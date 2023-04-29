@@ -6,5 +6,5 @@ import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/domai
 abstract class NyTimesStoriesRepository {
   // Gent Ny Times Stories
   Future<Either<Failure, List<StoryModel>>> getNyTimesStories(
-      NyTimesStoriesParams params);
+      StoriesParams params);
 }

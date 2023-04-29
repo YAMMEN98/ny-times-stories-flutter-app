@@ -2,11 +2,12 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' as fv;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ny_times_stories_app_flutter/src/core/common_feature/data/data_sources/app_shared_prefs.dart';
 import 'package:ny_times_stories_app_flutter/src/core/styles/app_theme.dart';
 import 'package:ny_times_stories_app_flutter/src/core/translations/l10n.dart';
-import 'package:ny_times_stories_app_flutter/src/core/util/helper.dart';
+import 'package:ny_times_stories_app_flutter/src/core/util/helper/helper.dart';
 import 'package:ny_times_stories_app_flutter/src/core/util/injections.dart';
 import 'package:ny_times_stories_app_flutter/src/core/util/router.dart';
 import 'package:ny_times_stories_app_flutter/src/features/intro/presentation/pages/intro_page.dart';
@@ -73,40 +74,42 @@ class _AppState extends State<App> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => AppNotifier(),
-      child: Consumer<AppNotifier>(
-        builder: (context, value, child) {
-          return ScreenUtilInit(
-            designSize: const Size(360, 690),
-            minTextAdapt: true,
-            splitScreenMode: true,
-            builder: (context, child) {
-              return MaterialApp(
-                useInheritedMediaQuery: false,
-                title: 'Ny Times Stories App',
-                scaffoldMessengerKey: snackbarKey,
-                onGenerateRoute: AppRouter.generateRoute,
-                theme: Helper.isDarkTheme() ? darkAppTheme : appTheme,
-                debugShowCheckedModeBanner: false,
-                locale: locale,
-                builder: DevicePreview.appBuilder,
-                localizationsDelegates: const [
-                  S.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                ],
-                navigatorKey: navigatorKey,
-                supportedLocales: const [
-                  Locale("ar"),
-                  Locale("en"),
-                ],
-                home: const IntroPage(),
-              );
-            },
-          );
-        },
+    return fv.ProviderScope(
+      child: ChangeNotifierProvider(
+        create: (_) => AppNotifier(),
+        child: Consumer<AppNotifier>(
+          builder: (context, value, child) {
+            return ScreenUtilInit(
+              designSize: const Size(360, 690),
+              minTextAdapt: true,
+              splitScreenMode: true,
+              builder: (context, child) {
+                return MaterialApp(
+                  useInheritedMediaQuery: false,
+                  title: 'Ny Times Stories App',
+                  scaffoldMessengerKey: snackbarKey,
+                  onGenerateRoute: AppRouter.generateRoute,
+                  theme: Helper.isDarkTheme() ? darkAppTheme : appTheme,
+                  debugShowCheckedModeBanner: false,
+                  locale: locale,
+                  builder: DevicePreview.appBuilder,
+                  localizationsDelegates: const [
+                    S.delegate,
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
+                  ],
+                  navigatorKey: navigatorKey,
+                  supportedLocales: const [
+                    Locale("ar"),
+                    Locale("en"),
+                  ],
+                  home: const IntroPage(),
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }

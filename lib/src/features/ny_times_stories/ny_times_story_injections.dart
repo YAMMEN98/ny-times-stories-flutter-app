@@ -14,8 +14,8 @@ initNyTimesStoriesInjections() {
       () => NyTimesStoriesApi(RestClient(DioNetwork.appAPI)));
   sl.registerFactory<NyTimesStoriesSharedPrefs>(
       () => NyTimesStoriesSharedPrefs(sl()));
-  sl.registerFactory<NyTimesStoriesUseCase>(
-      () => NyTimesStoriesUseCase(sl()));
+  sl.registerFactory<StoriesUseCase>(
+      () => StoriesUseCase(sl()));
   sl.registerFactory<NyTimesStoriesRepository>(
       () => NyTimesStoriesRepositoryImpl(sl()));
 }

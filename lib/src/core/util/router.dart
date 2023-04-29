@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ny_times_stories_app_flutter/src/core/common_feature/presentation/pages/photo_view_page.dart';
 import 'package:ny_times_stories_app_flutter/src/core/common_feature/presentation/pages/web_view_page.dart';
-import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/presentation/pages/ny_times_stories_page.dart';
+import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/presentation/pages/stories_page.dart';
 
 class AppRouter {
   static String currentRoute = "/";
@@ -11,10 +11,10 @@ class AppRouter {
     currentRoute = settings.name ?? "/";
     switch (settings.name) {
       // WebNy Times Stories page
-      case '/ny_times_stories_page':
+      case '/stories_page':
         return CupertinoPageRoute(
           settings: RouteSettings(name: settings.name),
-          builder: (_) => NyTimesStoriesPage(),
+          builder: (_) => StoriesPage(),
         );
 
       // Web view page

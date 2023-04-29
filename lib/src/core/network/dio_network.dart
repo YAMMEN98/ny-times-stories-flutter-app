@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:ny_times_stories_app_flutter/src/core/network/logger_interceptor.dart';
 import 'package:ny_times_stories_app_flutter/src/core/util/constant/network_constant.dart';
-import 'package:ny_times_stories_app_flutter/src/core/util/helper.dart';
+import 'package:ny_times_stories_app_flutter/src/core/util/helper/helper.dart';
 import 'package:ny_times_stories_app_flutter/src/core/util/log/app_logger.dart';
 
 class DioNetwork {

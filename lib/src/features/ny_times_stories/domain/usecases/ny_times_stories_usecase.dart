@@ -4,15 +4,15 @@ import 'package:ny_times_stories_app_flutter/src/core/util/usecases/usecase.dart
 import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/data/entities/story_model.dart';
 import 'package:ny_times_stories_app_flutter/src/features/ny_times_stories/domain/repositories/ny_times_stories_repository.dart';
 
-class NyTimesStoriesUseCase
-    extends UseCase<List<StoryModel>, NyTimesStoriesParams> {
+class StoriesUseCase
+    extends UseCase<List<StoryModel>, StoriesParams> {
   final NyTimesStoriesRepository repository;
 
-  NyTimesStoriesUseCase(this.repository);
+  StoriesUseCase(this.repository);
 
   @override
   Future<Either<Failure, List<StoryModel>>> call(
-      NyTimesStoriesParams params) async {
+      StoriesParams params) async {
     final result = await repository.getNyTimesStories(params);
     return result.fold((l) {
       return Left(l);
@@ -22,9 +22,9 @@ class NyTimesStoriesUseCase
   }
 }
 
-class NyTimesStoriesParams {
+class StoriesParams {
   final String section;
 
-  NyTimesStoriesParams(this.section);
+  StoriesParams(this.section);
 
 }

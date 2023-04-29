@@ -60,11 +60,14 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
     TextStyle hintStyle = Theme.of(context).textTheme.bodyLarge!.copyWith(
           color: AppColors.gray,
         );
-
     TextStyle textStyle = Theme.of(context).textTheme.bodyLarge!;
+
+    InputBorder defaultBorder = UnderlineInputBorder();
+
     return SizedBox(
       height: widget.height?.h,
       child: TextFormField(
+
         controller: widget.controller,
         onChanged: widget.onChanged,
         validator: widget.validator,
@@ -80,41 +83,19 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
         decoration: InputDecoration(
           prefixIcon: widget.prefixIcon,
           suffixIcon: widget.suffixIcon,
+          suffixIconConstraints: BoxConstraints(),
           contentPadding: widget.contentPadding,
           hintText: widget.hintText,
           hintStyle: widget.hintStyle ?? hintStyle,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(
-                widget.borderRadius ?? defaultBorderRadius),
-            borderSide: BorderSide(
-              color: widget.borderColor ?? defaultColor,
-              width: widget.borderWidth ?? defaultBorderWidth,
-            ),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(
-                widget.borderRadius ?? defaultBorderRadius),
-            borderSide: BorderSide(
-              color: widget.borderColor ?? defaultColor,
-              width: widget.borderWidth ?? defaultBorderWidth,
-            ),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(
-                widget.borderRadius ?? defaultBorderRadius),
+          border: defaultBorder,
+          enabledBorder: defaultBorder,
+          errorBorder: defaultBorder.copyWith(
             borderSide: BorderSide(
               color: AppColors.red,
               width: 2,
             ),
           ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(
-                widget.borderRadius ?? defaultBorderRadius),
-            borderSide: BorderSide(
-              color: widget.borderColor ?? defaultColor,
-              width: widget.borderWidth ?? defaultBorderWidth,
-            ),
-          ),
+          focusedBorder: defaultBorder,
         ),
       ),
     );

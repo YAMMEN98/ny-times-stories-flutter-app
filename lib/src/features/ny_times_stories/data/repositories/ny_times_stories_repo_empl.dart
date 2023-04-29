@@ -13,7 +13,7 @@ class NyTimesStoriesRepositoryImpl extends NyTimesStoriesRepository {
 
   @override
   Future<Either<Failure, List<StoryModel>>> getNyTimesStories(
-      NyTimesStoriesParams params) async {
+      StoriesParams params) async {
     try {
       final result = await nyTimesApi.getNyTimesData(params.section);
       return Right(result.results ?? []);

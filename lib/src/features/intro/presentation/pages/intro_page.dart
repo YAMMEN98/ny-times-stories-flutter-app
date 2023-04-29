@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ny_times_stories_app_flutter/src/core/styles/app_colors.dart';
-import 'package:ny_times_stories_app_flutter/src/core/util/helper.dart';
+import 'package:ny_times_stories_app_flutter/src/core/util/helper/helper.dart';
 
 class IntroPage extends StatefulWidget {
   const IntroPage({Key? key}) : super(key: key);
@@ -18,7 +18,7 @@ class _IntroPageState extends State<IntroPage> {
         seconds: 1,
       ),
       () {
-        Navigator.pushNamed(context, "/ny_times_stories_page");
+        Navigator.pushNamed(context, "/stories_page");
       },
     );
     super.initState();

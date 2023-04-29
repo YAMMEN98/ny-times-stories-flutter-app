@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ny_times_stories_app_flutter/src/core/styles/app_colors.dart';
-import 'package:ny_times_stories_app_flutter/src/core/util/helper.dart';
+import 'package:ny_times_stories_app_flutter/src/core/util/helper/helper.dart';
 
 class CustomAppBarWidget extends StatelessWidget {
   final double? height;
@@ -22,8 +22,9 @@ class CustomAppBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: ScreenUtil().screenWidth,
       height: height ?? 60.h,
-      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 0.h),
+      padding: EdgeInsets.symmetric(horizontal: 10.w, ),
       decoration: BoxDecoration(
           color: backgroundColor ?? Theme.of(context).scaffoldBackgroundColor,
           boxShadow: [
@@ -61,7 +62,7 @@ class CustomAppBarWidget extends StatelessWidget {
               children: actions!.map((e) {
                 return Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: 5.w,
+                    horizontal: 2.w,
                   ),
                   child: e,
                 );

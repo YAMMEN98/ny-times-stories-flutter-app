@@ -70,20 +70,30 @@ class S {
     );
   }
 
-  /// `NY Times Most Popular`
-  String get ny_times_most_popular {
+  /// `Filter`
+  String get filter {
     return Intl.message(
-      'NY Times Most Popular',
-      name: 'ny_times_most_popular',
+      'Filter',
+      name: 'filter',
       desc: '',
       args: [],
     );
   }
 
-  /// `Required Field`
+  /// `Search`
+  String get search {
+    return Intl.message(
+      'Search',
+      name: 'search',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Required field`
   String get required_field {
     return Intl.message(
-      'Required Field',
+      'Required field',
       name: 'required_field',
       desc: '',
       args: [],
@@ -120,91 +130,21 @@ class S {
     );
   }
 
-  /// ` Pull Up Load`
-  String get pull_up_load {
+  /// `Search by section`
+  String get search_by_section {
     return Intl.message(
-      ' Pull Up Load',
-      name: 'pull_up_load',
+      'Search by section',
+      name: 'search_by_section',
       desc: '',
       args: [],
     );
   }
 
-  /// `Load failed! Click Retry!`
-  String get load_failed {
+  /// `Section`
+  String get section {
     return Intl.message(
-      'Load failed! Click Retry!',
-      name: 'load_failed',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Release To Load More`
-  String get release_to_load {
-    return Intl.message(
-      'Release To Load More',
-      name: 'release_to_load',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `No Data!`
-  String get no_data {
-    return Intl.message(
-      'No Data!',
-      name: 'no_data',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Period`
-  String get period {
-    return Intl.message(
-      'Period',
-      name: 'period',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Search`
-  String get search {
-    return Intl.message(
-      'Search',
-      name: 'search',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Server Error`
-  String get server_error {
-    return Intl.message(
-      'Server Error',
-      name: 'server_error',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Article Details`
-  String get article_details {
-    return Intl.message(
-      'Article Details',
-      name: 'article_details',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `See More`
-  String get see_more {
-    return Intl.message(
-      'See More',
-      name: 'see_more',
+      'Section',
+      name: 'section',
       desc: '',
       args: [],
     );

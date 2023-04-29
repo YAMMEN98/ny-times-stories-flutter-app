@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ny_times_stories_app_flutter/src/core/common_feature/presentation/widgets/cached_image_widget.dart';
-import 'package:ny_times_stories_app_flutter/src/core/util/helper.dart';
+import 'package:ny_times_stories_app_flutter/src/core/util/helper/helper.dart';
 
 import '../../../../core/styles/app_colors.dart';
 

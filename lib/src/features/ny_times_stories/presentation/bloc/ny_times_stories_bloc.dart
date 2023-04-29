@@ -9,10 +9,10 @@ part 'ny_times_stories_state.dart';
 
 class NyTimesStoriesBloc
     extends Bloc<NyTimesStoriesEvent, NyTimesStoriesState> {
-  late NyTimesStoriesUseCase nyTimesUseCase;
+  late StoriesUseCase nyTimesUseCase;
 
   NyTimesStoriesBloc() : super(LoadingGetNyTimesStoriesState()) {
-    nyTimesUseCase = sl<NyTimesStoriesUseCase>();
+    nyTimesUseCase = sl<StoriesUseCase>();
 
     on<OnGettingNyTimesStoriesEvent>(_onGettingNyTimesEvent);
   }
@@ -23,7 +23,7 @@ class NyTimesStoriesBloc
     emitter(LoadingGetNyTimesStoriesState());
 
     final result = await nyTimesUseCase.call(
-      NyTimesStoriesParams(""),
+      StoriesParams(""),
     );
     result.fold((l) {
         emitter(ErrorGetNyTimesStoriesState(l.errorMessage));

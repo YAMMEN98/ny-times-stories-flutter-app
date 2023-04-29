@@ -4,7 +4,7 @@ import 'package:ny_times_stories_app_flutter/main.dart';
 import 'package:ny_times_stories_app_flutter/src/core/common_feature/data/data_sources/app_shared_prefs.dart';
 import 'package:ny_times_stories_app_flutter/src/core/common_feature/data/entities/language_enum.dart';
 import 'package:ny_times_stories_app_flutter/src/core/translations/l10n.dart';
-import 'package:ny_times_stories_app_flutter/src/core/util/helper.dart';
+import 'package:ny_times_stories_app_flutter/src/core/util/helper/helper.dart';
 import 'package:ny_times_stories_app_flutter/src/core/util/injections.dart';
 import 'package:provider/provider.dart';
 
